@@ -1,0 +1,113 @@
+﻿<ArchiveManager>
+
+  ////////////////////////////////////////////////////////////////////////////
+  <Class name="ArchiveManager">
+    <summary>
+      Loads managed objects from the binary files produced by the design time 
+      content pipeline the same way like <see cref="Microsoft.Xna.Framework.Content.ContentManager"/> does. 
+      Additionally it is capable of loading assets from a zip file.
+    </summary>
+    <remarks>
+      This class is based on Nick Gravelyn's EasyZip library.
+    </remarks>
+  </Class>
+  ////////////////////////////////////////////////////////////////////////////
+  
+  ////////////////////////////////////////////////////////////////////////////
+  <Member name="ArchivePath">
+    <summary>
+      Gets the path to the archive file associated with the manager.
+    </summary>
+  </Member>
+  ////////////////////////////////////////////////////////////////////////////
+  
+  ////////////////////////////////////////////////////////////////////////////
+  <Member name="ArchiveManager">
+    <param name="serviceProvider">
+      The service provider that the <see cref="ArchiveManager"/> should use to locate services.
+    </param>
+    <remarks>
+      By using this constructor <see cref="ArchiveManager"/> works like classic <see cref="ContentManager"/>. 
+    </remarks>
+  </Member>
+  ////////////////////////////////////////////////////////////////////////////
+  
+  ////////////////////////////////////////////////////////////////////////////
+  <Member name="ArchiveManager1">
+    <param name="serviceProvider">
+      The service provider that the <see cref="ArchiveManager"/> should use to locate services.
+    </param>
+    <param name="archive">
+      The path to the zip file, which will be used for reading assets from. 
+      If the parameter is set to null, <see cref="ArchiveManager"/> works like 
+      classic <see cref="ContentManager"/>.
+    </param>
+  </Member>
+  ////////////////////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////////////////
+  <Member name="OpenStream">
+    <summary>
+      Opens a stream for reading the specified asset contained inside the archive.
+    </summary>
+    <param name="assetName">
+      The name of the asset being read.
+    </param>
+    <returns>
+      Returns the opened stream.
+    </returns>
+    <remarks>
+      Input for this method is an asset name, not the file name.
+    </remarks>
+  </Member>
+  ////////////////////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////////////////
+  <Member name="GetAssetNames">
+    <summary>
+      Gets the list of all assets contained inside the archive.
+    </summary>
+    <returns>
+      Returns an array of strings.
+    </returns>
+    <remarks>
+      Asset names include full path.  
+    </remarks>
+  </Member>
+  ////////////////////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////////////////
+  <Member name="GetAssetNames1">
+    <summary>
+      Gets the list of assets contained inside the archive in the specified directory.
+    </summary>
+    <param name="directory">
+      The name of the directory being looked for assets in. If the parameter is null or empty string all assets are returned.
+    </param>
+    <returns>
+      Returns an array of strings.
+    </returns>
+    <remarks>
+      Asset names include full path.
+    </remarks>
+  </Member>
+  ////////////////////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////////////////
+  <Member name="GetFileStream">
+    <summary>
+      Opens a stream for reading the specified filename contained inside the archive.
+    </summary>
+    <param name="filename">
+      The name of the file.
+    </param>
+    <returns>
+      Returns the opened stream.
+    </returns>
+    <remarks>
+      This method is looking for file names, not assets.  
+    </remarks>
+  </Member>
+  ////////////////////////////////////////////////////////////////////////////
+
+</ArchiveManager>
