@@ -95,10 +95,6 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TomShane.Neoforce.Controls, Version=0.5.1805.1557, Culture=neutral, PublicKeyToken=f1d905e03f113061, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Bin\TomShane.Neoforce.Controls.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\TaskEvents.cs" />
@@ -174,6 +170,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Controls\Controls.csproj">
+      <Project>{9C8328B3-97FC-4F39-A1BC-6DC4A1730C26}</Project>
+      <Name>Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="Content\CentralContent.contentproj">
       <Project>{536F69A2-EDEA-4D12-A8A9-9AEC0AB05538}</Project>
       <Name>CentralContent %28Content%29</Name>
@@ -200,7 +200,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reset="0" AssemblyVersion="1" AssemblyFileVersion="0" StartDate="20080911" />
+      <UserProperties StartDate="20080911" AssemblyFileVersion="0" AssemblyVersion="1" Reset="0" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

@@ -1182,6 +1182,7 @@ namespace TomShane.Neoforce.Controls
           {
               if (renderTarget != null) RenderTarget.Dispose();
               RenderTarget = CreateRenderTarget();
+              renderer = new Renderer(this);
           }
           Draw(gameTime);
       }
@@ -1191,7 +1192,7 @@ namespace TomShane.Neoforce.Controls
     public override void Draw(GameTime gameTime)
     {      
       if (renderTarget != null)
-      {
+      {   
         drawTime += gameTime.ElapsedGameTime.Ticks;     
         double ms = TimeSpan.FromTicks(drawTime).TotalMilliseconds;
       
