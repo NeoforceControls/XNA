@@ -167,7 +167,11 @@ namespace TomShane.Neoforce.Controls
           int y = (rect.Height / 2) - (image.Height / 2);
           
           renderer.Draw(image, x, y, sourceRect, Color);
-        }          
+        }
+        else if (sizeMode == SizeMode.Tiled)
+        {
+            renderer.DrawTileTexture(image, rect, Color);
+        }
       }           
     }
     ////////////////////////////////////////////////////////////////////////////     

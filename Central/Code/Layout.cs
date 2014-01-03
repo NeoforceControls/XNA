@@ -332,7 +332,9 @@ namespace TomShane.Neoforce.Central
       tbc.TabPages[1].Add(con2);      
                               
       con1.Init();
-      con2.Init();           
+      con1.Sender = "Console1";
+      con2.Init();
+      con2.Sender = "Console2";
       
       con2.Width = con1.Width = tbc.TabPages[0].ClientWidth;
       con2.Height = con1.Height = tbc.TabPages[0].ClientHeight;
@@ -361,7 +363,7 @@ namespace TomShane.Neoforce.Central
       con1.MessageSent += new ConsoleMessageEventHandler(con1_MessageSent);      
       
       // We send initial welcome message to System channel
-      con1.MessageBuffer.Add(new ConsoleMessage("Welcome to Neoforce!", 2));
+      con1.MessageBuffer.Add(new ConsoleMessage("Application", "Welcome to Neoforce!", 2));
                     
       Manager.Add(tbc);      
     }

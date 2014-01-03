@@ -97,6 +97,7 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////
         private SpriteBatch sb = null;
         private DeviceStates states = new DeviceStates();
+        private BlendingMode bmode = BlendingMode.Default;
         ////////////////////////////////////////////////////////////////////////////
 
         #endregion
@@ -158,6 +159,7 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////
         public virtual void Begin(BlendingMode mode)
         {
+            bmode = mode;
             if (mode != BlendingMode.None)
             {
                 sb.Begin(SpriteSortMode.Immediate, states.BlendState, states.SamplerState, states.DepthStencilState, states.RasterizerState);
@@ -185,6 +187,21 @@ namespace TomShane.Neoforce.Controls
             }
         }
         ////////////////////////////////////////////////////////////////////////////
+
+        public virtual void DrawTileTexture(Texture2D texture, Rectangle destination, Color color)
+        {
+            if (destination.Width > 0 && destination.Height > 0)
+            {
+                End();
+
+                sb.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone);
+
+                sb.Draw(texture, new Vector2(destination.X,destination.Y), destination, color, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+                End();
+                Begin(bmode);
+            }
+        }
 
         ////////////////////////////////////////////////////////////////////////////
         public virtual void Draw(Texture2D texture, Rectangle destination, Rectangle source, Color color)

@@ -24,6 +24,7 @@
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -46,9 +47,21 @@ namespace TomShane.Neoforce.Controls
               this.orientation = value;
               this.CalcLayout();
           }
-      }    
+      }
+      private bool autoRefresh;
+
+      /// <summary>
+      /// Should the stack panel refresh itself, when a control is added
+      /// </summary>
+      public bool AutoRefresh
+      {
+          get { return autoRefresh; }
+          set { autoRefresh = value; }
+      }
     ////////////////////////////////////////////////////////////////////////////
 
+      private TimeSpan refreshTimer;
+      private const int refreshTime = 300; //ms
     #endregion
    
     #region //// Constructors //////
@@ -58,6 +71,8 @@ namespace TomShane.Neoforce.Controls
     {
       this.orientation = orientation;
       this.Color = Color.Transparent;
+      this.autoRefresh = true;
+      refreshTimer = new TimeSpan(0, 0, 0, 0, refreshTime);
     }
     ////////////////////////////////////////////////////////////////////////////
 
@@ -110,6 +125,33 @@ namespace TomShane.Neoforce.Controls
       base.OnResize(e);
     }
     ////////////////////////////////////////////////////////////////////////////
+
+    protected internal override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+
+        if (autoRefresh)
+        {
+            refreshTimer = refreshTimer.Subtract(TimeSpan.FromMilliseconds(gameTime.ElapsedGameTime.TotalMilliseconds));
+            if (refreshTimer.TotalMilliseconds <= 0.00)
+            {
+                Refresh();
+                refreshTimer = new TimeSpan(0, 0, 0, 0, refreshTime);
+            }
+        }
+    }
+
+    public override void Add(Control control)
+    {
+        base.Add(control);
+        if (autoRefresh) Refresh();
+    }
+
+    public override void Add(Control control, bool client)
+    {
+        base.Add(control, client);
+        if (autoRefresh) Refresh();
+    }
     
     #endregion
   

@@ -39,12 +39,14 @@ namespace TomShane.Neoforce.Controls
         public string Text;
         public byte Channel;
         public DateTime Time;
+        public string Sender;
 
-        public ConsoleMessage(string text, byte channel)
+        public ConsoleMessage(string sender, string text, byte channel)
         {
             this.Text = text;
             this.Channel = channel;
             this.Time = DateTime.Now;
+            this.Sender = sender;
         }
     }
 
@@ -155,7 +157,8 @@ namespace TomShane.Neoforce.Controls
         None = 0x00,
         ChannelName = 0x01,
         TimeStamp = 0x02,
-        All = ChannelName | TimeStamp
+        Sender = 0x03,
+        All = Sender | ChannelName | TimeStamp
     }
 
     public class Console : Container
@@ -173,11 +176,18 @@ namespace TomShane.Neoforce.Controls
         private ConsoleMessageFormats messageFormat = ConsoleMessageFormats.None;
         private bool channelsVisible = true;
         private bool textBoxVisible = true;
+        private string sender;
         ////////////////////////////////////////////////////////////////////////////
 
         #endregion
 
         #region //// Properties ////////
+
+        public string Sender
+        {
+            get { return sender; }
+            set { sender = value; }
+        }
 
         ////////////////////////////////////////////////////////////////////////////
         public virtual EventedList<ConsoleMessage> MessageBuffer
@@ -406,6 +416,10 @@ namespace TomShane.Neoforce.Controls
                             {
                                 pre += string.Format("[{0}]", channels[((ConsoleMessage)b[i]).Channel].Name);
                             }
+                            if ((messageFormat & ConsoleMessageFormats.Sender) == ConsoleMessageFormats.Sender)
+                            {
+                                pre += string.Format("[{0}]", ((ConsoleMessage)b[i]).Sender);
+                            }
                             if ((messageFormat & ConsoleMessageFormats.TimeStamp) == ConsoleMessageFormats.TimeStamp)
                             {
                                 pre = string.Format("[{0}]", ((ConsoleMessage)b[i]).Time.ToLongTimeString()) + pre;
@@ -477,10 +491,10 @@ namespace TomShane.Neoforce.Controls
                 {
                     x.Handled = true;
 
-                    ConsoleMessageEventArgs me = new ConsoleMessageEventArgs(new ConsoleMessage(message, ch.Index));
+                    ConsoleMessageEventArgs me = new ConsoleMessageEventArgs(new ConsoleMessage(sender, message, ch.Index));
                     OnMessageSent(me);
 
-                    buffer.Add(new ConsoleMessage(me.Message.Text, me.Message.Channel));
+                    buffer.Add(new ConsoleMessage(sender, me.Message.Text, me.Message.Channel));
 
                     txtMain.Text = "";
                     ClientArea.Invalidate();

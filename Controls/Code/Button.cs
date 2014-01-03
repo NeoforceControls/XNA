@@ -40,7 +40,11 @@ namespace TomShane.Neoforce.Controls
     Normal, 
     Auto,
     Centered,
-    Stretched
+    Stretched,
+      /// <summary>
+      /// Only Supported by ImageBox
+      /// </summary>
+    Tiled
   }  
   ////////////////////////////////////////////////////////////////////////////
 
