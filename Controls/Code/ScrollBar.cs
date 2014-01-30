@@ -212,6 +212,40 @@ namespace TomShane.Neoforce.Controls
 
     ////////////////////////////////////////////////////////////////////////////
 
+    public void ScrollUp()
+    {
+        Value -= stepSize;
+        if (Value < 0) Value = 0;
+    }
+ 
+    public void ScrollDown()
+    {
+        Value += stepSize;
+        if (Value > range - pageSize) Value = range - pageSize - 1;
+    }
+ 
+    public void ScrollUp(bool alot)
+    {
+        if (alot)
+        {
+            Value -= pageSize;
+            if (Value < 0) Value = 0;
+        }
+        else
+            ScrollUp();
+    }
+ 
+    public void ScrollDown(bool alot)
+    {
+        if (alot)
+        {
+            Value += pageSize;
+            if (Value > range - pageSize) Value = range - pageSize - 1;
+        }
+        else
+            ScrollDown();
+    }
+
     ////////////////////////////////////////////////////////////////////////////   
     public override void Init()
     {
@@ -266,13 +300,11 @@ namespace TomShane.Neoforce.Controls
       {
         if (sender == btnMinus)
         {
-          Value -= StepSize;
-          if (Value < 0) Value = 0;
+            ScrollUp();
         }
         else if (sender == btnPlus)
         {
-          Value += StepSize;
-          if (Value > range - pageSize) Value = range - pageSize - 1;
+            ScrollDown();
         }       
       }
     }
@@ -402,13 +434,11 @@ namespace TomShane.Neoforce.Controls
           
           if (pos < btnSlider.Left)
           {
-            Value -= pageSize;
-            if (Value < 0) Value = 0;        
+              ScrollUp(true);      
           }
           else if (pos >= btnSlider.Left + btnSlider.Width)
           {
-            Value += pageSize;
-            if (Value > range - pageSize) Value = range - pageSize;
+              ScrollDown(true);
           } 
         }
         else
@@ -417,13 +447,11 @@ namespace TomShane.Neoforce.Controls
 
           if (pos < btnSlider.Top)
           {
-            Value -= pageSize;
-            if (Value < 0) Value = 0;
+              ScrollUp(true);
           }
           else if (pos >= btnSlider.Top + btnSlider.Height)
           {
-            Value += pageSize;
-            if (Value > range - pageSize) Value = range - pageSize;
+              ScrollDown(true);
           }       
         }                               
       }  

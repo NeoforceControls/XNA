@@ -59,6 +59,13 @@ namespace TomShane.Neoforce.Controls
   }
   ////////////////////////////////////////////////////////////////////////////
 
+  public enum MouseScrollDirection
+  {
+    None = 0,
+    Down = 1,
+    Up = 2
+  }
+
   ////////////////////////////////////////////////////////////////////////////
   public enum GamePadButton
   {
@@ -273,7 +280,11 @@ namespace TomShane.Neoforce.Controls
     public event MouseEventHandler MouseDown;
     public event MouseEventHandler MousePress;
     public event MouseEventHandler MouseUp;        
-    public event MouseEventHandler MouseMove;    
+    public event MouseEventHandler MouseMove; 
+    /// <summary>
+    /// Occurs when the mouse is scrolled.
+    /// </summary>
+    public event MouseEventHandler MouseScroll;
     
     public event GamePadEventHandler GamePadUp;
     public event GamePadEventHandler GamePadDown;
@@ -632,6 +643,13 @@ namespace TomShane.Neoforce.Controls
     }
     ////////////////////////////////////////////////////////////////////////////    
 
+    private void BuildMouseEvent(MouseState state, MouseButton button, MouseScrollDirection direction, ref MouseEventArgs e)
+    {
+        BuildMouseEvent(state, button, ref e);
+
+        e.ScrollDirection = direction;
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     private void UpdateMouse(MouseState state, GameTime gameTime)
     {            
@@ -653,7 +671,21 @@ namespace TomShane.Neoforce.Controls
         {
           MouseMove.Invoke(this, e);
         }  
-      }            
+      }
+
+      // Mouse wheel position changed
+      if (state.ScrollWheelValue != mouseState.ScrollWheelValue)
+      {
+          MouseEventArgs e = new MouseEventArgs();
+          MouseScrollDirection direction = state.ScrollWheelValue < mouseState.ScrollWheelValue ? MouseScrollDirection.Down : MouseScrollDirection.Up;
+
+          BuildMouseEvent(state, MouseButton.None, direction, ref e);
+
+          if (MouseScroll != null)
+          {
+              MouseScroll.Invoke(this, e);
+          }
+      }
       
       UpdateButtons(state, gameTime);    
       

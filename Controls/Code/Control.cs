@@ -171,6 +171,10 @@ namespace TomShane.Neoforce.Controls
     private Margins anchorMargins = new Margins();
     private Margins clientMargins = new Margins();
     private Rectangle outlineRect = Rectangle.Empty;    
+    /// <summary>
+    /// Tracks the position of the mouse scroll wheel
+    /// </summary>
+    private int scrollWheel = 0;
     ////////////////////////////////////////////////////////////////////////////                     
     
     #endregion  
@@ -1218,6 +1222,10 @@ namespace TomShane.Neoforce.Controls
     public event MouseEventHandler MouseMove;
     public event MouseEventHandler MouseOver;
     public event MouseEventHandler MouseOut;
+    /// <summary>
+    /// Occurs when the mouse scroll wheel position changes
+    /// </summary>
+    public event MouseEventHandler MouseScroll;
     public event KeyEventHandler KeyDown;
     public event KeyEventHandler KeyPress;
     public event KeyEventHandler KeyUp;
@@ -2033,6 +2041,11 @@ namespace TomShane.Neoforce.Controls
           MousePressProcess(e as MouseEventArgs);
           break;
         }
+        case Message.MouseScroll:
+        {
+          MouseScrollProcess(e as MouseEventArgs);
+          break;
+        }
         case Message.MouseMove:
         {
           MouseMoveProcess(e as MouseEventArgs);
@@ -2272,6 +2285,14 @@ namespace TomShane.Neoforce.Controls
     }
     ////////////////////////////////////////////////////////////////////////////   
 
+    void MouseScrollProcess(MouseEventArgs e)
+    {
+        if (!IsMoving && !IsResizing && !Suspended)
+        {
+            OnMouseScroll(e);
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     private void MouseOverProcess(MouseEventArgs e)
     {
@@ -2486,7 +2507,7 @@ namespace TomShane.Neoforce.Controls
     ////////////////////////////////////////////////////////////////////////////                
 
     ////////////////////////////////////////////////////////////////////////////
-    private MouseEventArgs TransformPosition(MouseEventArgs e)
+    protected MouseEventArgs TransformPosition(MouseEventArgs e)
     {
       MouseEventArgs ee = new MouseEventArgs(e.State, e.Button, e.Position);
       ee.Difference = e.Difference;
@@ -3008,6 +3029,11 @@ namespace TomShane.Neoforce.Controls
     }
     ////////////////////////////////////////////////////////////////////////////
     
+    protected virtual void OnMouseScroll(MouseEventArgs e)
+    {
+        if (MouseScroll != null) MouseScroll.Invoke(this, e);
+    }
+
     #endregion       
           
     #endregion  
