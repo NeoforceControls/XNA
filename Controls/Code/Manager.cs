@@ -655,6 +655,7 @@ namespace TomShane.Neoforce.Controls
       input.MouseUp += new MouseEventHandler(MouseUpProcess);
       input.MousePress += new MouseEventHandler(MousePressProcess);
       input.MouseMove += new MouseEventHandler(MouseMoveProcess);
+      input.MouseScroll += new MouseEventHandler(MouseScrollProcess);
 
       input.GamePadDown += new GamePadEventHandler(GamePadDownProcess);
       input.GamePadUp += new GamePadEventHandler(GamePadUpProcess);
@@ -1700,6 +1701,29 @@ namespace TomShane.Neoforce.Controls
     }
     ////////////////////////////////////////////////////////////////////////////      
        
+    /// <summary>
+    /// Processes mouse scroll events for the manager.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void MouseScrollProcess(object sender, MouseEventArgs e)
+    {
+        ControlsList c = new ControlsList();
+        c.AddRange(OrderList);
+ 
+        for (int i = c.Count - 1; i >= 0; i--)
+        {
+            bool chpos = CheckPosition(c[i], e.Position);
+            bool chsta = CheckState(c[i]);
+ 
+            if (chsta && chpos && states.Over == c[i])
+            {
+                c[i].SendMessage(Message.MouseScroll, e);
+                break;
+            }
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     void GamePadDownProcess(object sender, GamePadEventArgs e)
     {       

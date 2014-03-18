@@ -975,6 +975,22 @@ namespace TomShane.Neoforce.Controls
     }
     ////////////////////////////////////////////////////////////////////////////       
 
+    protected override void OnMouseScroll(MouseEventArgs e)
+    {
+        if (Mode != TextBoxMode.Multiline)
+        {
+            base.OnMouseScroll(e);
+            return;
+        }
+ 
+        if (e.ScrollDirection == MouseScrollDirection.Down)
+            vert.ScrollDown();
+        else
+            vert.ScrollUp();
+ 
+        base.OnMouseScroll(e);
+    }
+
     ////////////////////////////////////////////////////////////////////////////     
     protected override void OnKeyPress(KeyEventArgs e)
     {

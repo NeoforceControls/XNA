@@ -49,6 +49,11 @@ namespace TomShane.Neoforce.Controls
     private StatusBar statusBar;
     private bool autoScroll = false;
     private Control defaultControl = null;   
+
+    /// <summary>
+    /// Scroll by PageSize (true) or StepSize (false)
+    /// </summary>
+    private bool scrollAlot = true;
     ////////////////////////////////////////////////////////////////////////////
 
     #endregion   
@@ -180,6 +185,31 @@ namespace TomShane.Neoforce.Controls
     }    
     ////////////////////////////////////////////////////////////////////////////
     
+    /// <summary>
+    /// Scroll by PageSize (true) or StepSize (false)
+    /// </summary>
+    public virtual bool ScrollAlot
+    {
+        get { return this.scrollAlot; }
+        set { this.scrollAlot = value; }
+    }
+ 
+    /// <summary>
+    /// Gets the container's vertical scroll bar.
+    /// </summary>
+    protected virtual ScrollBar VerticalScrollBar
+    {
+        get { return this.sbVert; }
+    }
+ 
+    /// <summary>
+    /// Gets the container's horizontal scroll bar.
+    /// </summary>
+    protected virtual ScrollBar HorizontalScrollBar
+    {
+        get { return this.sbHorz; }
+    }
+
     #endregion
     
  	  #region //// Constructors //////
@@ -482,9 +512,43 @@ namespace TomShane.Neoforce.Controls
       
       base.OnClick(e);
     }
-    ////////////////////////////////////////////////////////////////////////////      
-              
+    ////////////////////////////////////////////////////////////////////////////       
+   
+    protected override void OnMouseScroll(MouseEventArgs e)
+    {
+        if (!ClientArea.Enabled)
+            return;
+ 
+        // If current control doesn't scroll, scroll the parent control
+        if (sbVert.Range - sbVert.PageSize < 1)
+        {
+            Control c = this;
+ 
+            while (c != null)
+            {
+                var p = c.Parent as Container;
+ 
+                if (p != null && p.Enabled)
+                {
+                    p.OnMouseScroll(e);
+ 
+                    break;
+                }
+ 
+                c = c.Parent;
+            }
+ 
+            return;
+        }
+ 
+        if (e.ScrollDirection == MouseScrollDirection.Down)
+            sbVert.ScrollDown(ScrollAlot);
+        else
+            sbVert.ScrollUp(ScrollAlot);
+ 
+        base.OnMouseScroll(e);
+    }
     #endregion
-  }
+ }
 
 }
