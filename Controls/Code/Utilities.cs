@@ -22,9 +22,10 @@
 
 ////////////////////////////////////////////////////////////////////////////
 using System;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit.Input;
+using SharpDX.Toolkit;
+using SharpDX;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -68,7 +69,7 @@ namespace TomShane.Neoforce.Controls
       if (val.Length >= 3) b = byte.Parse(val[2]);
       if (val.Length >= 4) a = byte.Parse(val[3]);
 
-      return Color.FromNonPremultiplied(r, g, b, a);
+      return new Color(r, g, b, a);
     }
     ////////////////////////////////////////////////////////////////////////////
 

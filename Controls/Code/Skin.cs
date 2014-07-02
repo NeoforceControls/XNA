@@ -25,11 +25,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit;
 
 #if (!XBOX && !XBOX_FAKE)
   using System.Windows.Forms;
+using SharpDX;
 #endif
 ////////////////////////////////////////////////////////////////////////////
 

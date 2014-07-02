@@ -23,9 +23,10 @@
 ////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit.Input;
+using SharpDX;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -306,8 +307,8 @@ namespace TomShane.Neoforce.Controls
     protected override void OnMouseOut(MouseEventArgs e)
     {
       base.OnMouseOut(e);
-            
-      if (!CheckArea(e.State.X, e.State.Y) && ChildMenu == null)
+
+      if (!CheckArea(e.State.Absolute().X, e.State.Absolute().Y) && ChildMenu == null)
       {
         ItemIndex = -1;
       }  

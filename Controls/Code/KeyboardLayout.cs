@@ -25,7 +25,7 @@
 #region //// Using /////////////
         
 //////////////////////////////////////////////////////////////////////////////
-using Microsoft.Xna.Framework.Input;
+using SharpDX.Toolkit.Input;
 using System.Globalization;
 using System.Collections.Generic;
 using System;

@@ -22,11 +22,12 @@
 
 ////////////////////////////////////////////////////////////////////////////
 using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework.GamerServices;
+using SharpDX;
+
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -468,7 +469,7 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////        
         private void SendMessage(EventArgs x)
         {
-            if (Manager.UseGuide && Guide.IsVisible) return;
+            //if (Manager.UseGuide && Guide.IsVisible) return;
 
             KeyEventArgs k = new KeyEventArgs();
             GamePadEventArgs g = new GamePadEventArgs(PlayerIndex.One);
@@ -482,7 +483,7 @@ namespace TomShane.Neoforce.Controls
                 txtMain.TextColor = ch.Color;
 
                 string message = txtMain.Text;
-                if ((k.Key == Microsoft.Xna.Framework.Input.Keys.Enter || g.Button == GamePadActions.Press) && message != null && message != "")
+                if ((k.Key ==SharpDX.Toolkit.Input.Keys.Enter || g.Button == GamePadActions.Press) && message != null && message != "")
                 {
                     x.Handled = true;
 
@@ -542,7 +543,7 @@ namespace TomShane.Neoforce.Controls
         {
             if (VerticalScrollBar != null)
             {
-                int line = Skin.Layers[0].Text.Font.Resource.LineSpacing;
+                int line = (int)Skin.Layers[0].Text.Font.Resource.LineSpacing;
                 int c = GetFilteredBuffer(filter).Count;
                 int p = (int)Math.Ceiling(ClientArea.ClientHeight / (float)line);
 

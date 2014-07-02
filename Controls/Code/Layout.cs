@@ -22,11 +22,11 @@
 
 ////////////////////////////////////////////////////////////////////////////
 using System;
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit;
 using System.Xml;
 using System.Reflection;
 using System.IO;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit.Graphics;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion

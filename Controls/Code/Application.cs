@@ -21,13 +21,14 @@
 #region //// Using /////////////
 
 ////////////////////////////////////////////////////////////////////////////
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
 using TomShane.Neoforce.Controls;
 using System;
 
 #if (!XBOX && !XBOX_FAKE)
 using System.Windows.Forms;
+using SharpDX;
 #endif
 ////////////////////////////////////////////////////////////////////////////
 
@@ -168,11 +169,12 @@ namespace TomShane.Neoforce.Controls
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 768;
-            graphics.PreferredBackBufferFormat = SurfaceFormat.Color;
+            graphics.PreferredBackBufferFormat = PixelFormat.R8G8B8A8.UInt;
             graphics.IsFullScreen = false;
             graphics.PreferMultiSampling = false;
             graphics.SynchronizeWithVerticalRetrace = false;
-            graphics.DeviceReset += new EventHandler<System.EventArgs>(Graphics_DeviceReset);
+            //TODO: Hookup this event
+            //graphics.DeviceReset += new EventHandler<System.EventArgs>(Graphics_DeviceReset);
 
             IsFixedTimeStep = false;
             IsMouseVisible = true;
@@ -217,8 +219,8 @@ namespace TomShane.Neoforce.Controls
             sprite = new SpriteBatch(GraphicsDevice);
 
 #if (!XBOX && !XBOX_FAKE)
-            Manager.Window.BackColor = System.Drawing.Color.Black;
-            Manager.Window.FormBorderStyle = systemBorder ? System.Windows.Forms.FormBorderStyle.FixedDialog : System.Windows.Forms.FormBorderStyle.None;
+            //Manager.Window.BackColor = System.Drawing.Color.Black;
+            //Manager.Window.FormBorderStyle = systemBorder ? System.Windows.Forms.FormBorderStyle.FixedDialog : System.Windows.Forms.FormBorderStyle.None;
 
             Manager.Input.MouseMove += new MouseEventHandler(Input_MouseMove);
             Manager.Input.MouseDown += new MouseEventHandler(Input_MouseDown);
@@ -425,11 +427,11 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////	
         private void Input_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mouseDown)
-            {
-                Manager.Window.Left = e.Position.X + Manager.Window.Left - mousePos.X;
-                Manager.Window.Top = e.Position.Y + Manager.Window.Top - mousePos.Y;
-            }
+            //if (mouseDown)
+            //{
+            //    Manager.Window.Left = e.Position.X + Manager.Window.Left - mousePos.X;
+            //    Manager.Window.Top = e.Position.Y + Manager.Window.Top - mousePos.Y;
+            //}
         }
         ////////////////////////////////////////////////////////////////////////////	
 

@@ -23,15 +23,16 @@
 ////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit.Input;
 
 #if (!XBOX && !XBOX_FAKE)
   using System.Media;
   using System.Windows.Forms;
 using System.Collections;
 using System.ComponentModel;
+using SharpDX;
 #endif
 ////////////////////////////////////////////////////////////////////////////
 
@@ -1457,14 +1458,14 @@ namespace TomShane.Neoforce.Controls
     {
       if (width > 0 && height > 0)
       {
-        return new RenderTarget2D(Manager.GraphicsDevice,
-                                  width,
-                                  height,
-                                  false,
-                                  SurfaceFormat.Color,
-                                  DepthFormat.None,
-                                  Manager.GraphicsDevice.PresentationParameters.MultiSampleCount,
-                                  Manager._RenderTargetUsage);                                  
+          return RenderTarget2D.New(Manager.GraphicsDevice,
+                                    width,
+                                    height,
+              //false,
+                                    PixelFormat.R8G8B8A8.UInt);
+                                  //DepthFormat.None,
+                                  //Manager.GraphicsDevice.Presenter.Description.MultiSampleCount,
+                                  //Manager._RenderTargetUsage);                                  
                                   
       }
 
@@ -1500,13 +1501,13 @@ namespace TomShane.Neoforce.Controls
 
           if (target != null)
           {                        
-            Manager.GraphicsDevice.SetRenderTarget(target);
+            Manager.GraphicsDevice.SetRenderTargets(target);
             target.GraphicsDevice.Clear(backColor);
 
             Rectangle rect = new Rectangle(0, 0, OriginWidth, OriginHeight);   
             DrawControls(renderer, rect, gameTime, false);                     
             
-            Manager.GraphicsDevice.SetRenderTarget(null);                        
+            Manager.GraphicsDevice.ClearState(); //.SetRenderTargets(null);                        
           }
           invalidated = false;
         }
@@ -1540,14 +1541,14 @@ namespace TomShane.Neoforce.Controls
         {
           // We skip detached controls for first level after root (they are rendered separately in Draw() method)
           if (((c.Root == c.Parent && !c.Detached) || c.Root != c.Parent) && AbsoluteRect.Intersects(c.AbsoluteRect) && c.visible)
-          {            
-            Manager.GraphicsDevice.ScissorRectangle = GetClippingRect(c);                        
+          {
+              Manager.GraphicsDevice.SetScissorRectangles(GetClippingRect(c));
 
             Rectangle rect = new Rectangle(c.OriginLeft - root.AbsoluteLeft, c.OriginTop - root.AbsoluteTop, c.OriginWidth, c.OriginHeight);
             if (c.Root != c.Parent && ((!c.Detached && CheckDetached(c)) || firstDetachedLevel))
             {
               rect = new Rectangle(c.OriginLeft, c.OriginTop, c.OriginWidth, c.OriginHeight);
-              Manager.GraphicsDevice.ScissorRectangle = rect;
+              Manager.GraphicsDevice.SetScissorRectangles(rect);
             }
 
             renderer.Begin(BlendingMode.Default);
@@ -1616,7 +1617,7 @@ namespace TomShane.Neoforce.Controls
         if (draw)
         {
           renderer.Begin(BlendingMode.Default);
-          renderer.Draw(target, OriginLeft, OriginTop, new Rectangle(0, 0, OriginWidth, OriginHeight), Color.FromNonPremultiplied(255, 255, 255, Alpha));
+          renderer.Draw(target, OriginLeft, OriginTop, new Rectangle(0, 0, OriginWidth, OriginHeight), new Color((byte)255, (byte)255, (byte)255, Alpha));
           renderer.End();
           
           DrawDetached(this, renderer, gameTime);
@@ -2165,7 +2166,7 @@ namespace TomShane.Neoforce.Controls
 
       ToolTipOut();
 
-      if (e.Key == Microsoft.Xna.Framework.Input.Keys.Space && !IsPressed)
+      if (e.Key ==SharpDX.Toolkit.Input.Keys.Space && !IsPressed)
       {
         pressed[(int)MouseButton.None] = true;
       }
@@ -2179,14 +2180,14 @@ namespace TomShane.Neoforce.Controls
     {
       Invalidate();
 
-      if (e.Key == Microsoft.Xna.Framework.Input.Keys.Space && pressed[(int)MouseButton.None])
+      if (e.Key ==SharpDX.Toolkit.Input.Keys.Space && pressed[(int)MouseButton.None])
       {
         pressed[(int)MouseButton.None] = false;
       }
 
       if (!Suspended) OnKeyUp(e);
 
-      if (e.Key == Microsoft.Xna.Framework.Input.Keys.Apps && !e.Handled)
+      if (e.Key ==SharpDX.Toolkit.Input.Keys.Apps && !e.Handled)
       {
         if (contextMenu != null)
         {
@@ -2512,8 +2513,8 @@ namespace TomShane.Neoforce.Controls
       MouseEventArgs ee = new MouseEventArgs(e.State, e.Button, e.Position);
       ee.Difference = e.Difference;
 
-      ee.Position.X = ee.State.X - AbsoluteLeft;
-      ee.Position.Y = ee.State.Y - AbsoluteTop;
+      ee.Position.X = (int)(ee.State.X - AbsoluteLeft);
+      ee.Position.Y = (int)(ee.State.Y - AbsoluteTop);
       return ee;
     }
     ////////////////////////////////////////////////////////////////////////////

@@ -20,16 +20,17 @@
 
 #region //// Using /////////////
 
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit;
 ////////////////////////////////////////////////////////////////////////////
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit.Input;
 using System;
 using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Microsoft.Xna.Framework.GamerServices;
+using SharpDX;
+
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -639,13 +640,13 @@ namespace TomShane.Neoforce.Controls
             size.X = 0;
           }
 
-          int m = r.Height - font.LineSpacing;
+          int m = r.Height - (int)font.LineSpacing;
 
-          Rectangle rc = new Rectangle(r.Left - horz.Value + (int)size.X, r.Top + m / 2, cursor.Width, font.LineSpacing);
+          Rectangle rc = new Rectangle(r.Left - horz.Value + (int)size.X, r.Top + m / 2, cursor.Width, (int)font.LineSpacing);
 
           if (mode == TextBoxMode.Multiline)
           {
-            rc = new Rectangle(r.Left + (int)size.X - horz.Value, r.Top + (int)((PosY - vert.Value) * font.LineSpacing), cursor.Width, font.LineSpacing);
+              rc = new Rectangle(r.Left + (int)size.X - horz.Value, r.Top + (int)((PosY - vert.Value) * (int)font.LineSpacing), cursor.Width, (int)font.LineSpacing);
           }
           cursor.Alignment = al;
           renderer.DrawLayer(cursor, rc, col, 0);
@@ -730,7 +731,7 @@ namespace TomShane.Neoforce.Controls
         int sc = GetPosX(s);
         int ec = GetPosX(e);
 
-        int hgt = font.LineSpacing;
+        int hgt = (int)font.LineSpacing;
 
         int start = sl;
         int end = el;
@@ -744,7 +745,7 @@ namespace TomShane.Neoforce.Controls
 
           if (mode == TextBoxMode.Normal)
           {
-            int m = ClientArea.Height - font.LineSpacing;
+              int m = ClientArea.Height - (int)font.LineSpacing;
             r = new Rectangle(rect.Left - horz.Value + (int)font.MeasureString(Lines[i].Substring(0, sc)).X, rect.Top + m / 2,
                              (int)font.MeasureString(Lines[i].Substring(0, ec + 0)).X - (int)font.MeasureString(Lines[i].Substring(0, sc)).X, hgt);
           }
@@ -760,7 +761,7 @@ namespace TomShane.Neoforce.Controls
             else r = new Rectangle(rect.Left - horz.Value, rect.Top + (i - vert.Value) * hgt, (int)font.MeasureString(Lines[i]).X, hgt);
           }
 
-          renderer.Draw(Manager.Skin.Images["Control"].Resource, r, Color.FromNonPremultiplied(160, 160, 160, 128));
+          renderer.Draw(Manager.Skin.Images["Control"].Resource, r, new Color(160, 160, 160, 128));
         }
       }
     }
@@ -996,7 +997,8 @@ namespace TomShane.Neoforce.Controls
     {
       flashTime = 0;
       
-      if (Manager.UseGuide && Guide.IsVisible) return;
+        //TODO: Implement Guide
+      //if (Manager.UseGuide && Guide.IsVisible) return;
       
       if (!e.Handled)
       {
@@ -1233,7 +1235,8 @@ namespace TomShane.Neoforce.Controls
     ////////////////////////////////////////////////////////////////////////////        
     protected override void OnGamePadDown(GamePadEventArgs e)
     {
-      if (Manager.UseGuide && Guide.IsVisible) return;
+        //TODO: Implement Guide
+      //if (Manager.UseGuide && Guide.IsVisible) return;
 
       if (!e.Handled)
       {
@@ -1250,17 +1253,19 @@ namespace TomShane.Neoforce.Controls
     ////////////////////////////////////////////////////////////////////////////
     private void HandleGuide(PlayerIndex pi)
     {
-      if (Manager.UseGuide && !Guide.IsVisible)
-      {        
-        Guide.BeginShowKeyboardInput(pi, "Enter Text", "", Text, GetText, pi.ToString());
-      }   
+        //TODO: Implement Guide
+      //if (Manager.UseGuide && !Guide.IsVisible)
+      //{        
+      //  Guide.BeginShowKeyboardInput(pi, "Enter Text", "", Text, GetText, pi.ToString());
+      //}   
     }
     ////////////////////////////////////////////////////////////////////////////
     
     ////////////////////////////////////////////////////////////////////////////
     private void GetText(IAsyncResult result)
-    {      
-      string res = Guide.EndShowKeyboardInput(result);
+    {
+        //TODO: Implement Guide
+        string res = null; // Guide.EndShowKeyboardInput(result);
       Text = res != null ? res : "";
       Pos = text.Length;
     }

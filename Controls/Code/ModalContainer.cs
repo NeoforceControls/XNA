@@ -21,7 +21,7 @@
 #region //// Using /////////////
 
 ////////////////////////////////////////////////////////////////////////////
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -163,7 +163,7 @@ namespace TomShane.Neoforce.Controls
     void Input_KeyDown(object sender, KeyEventArgs e)
     {
       if (Visible && (Manager.FocusedControl != null && Manager.FocusedControl.Root == this) && 
-          e.Key == Microsoft.Xna.Framework.Input.Keys.Escape)
+          e.Key ==SharpDX.Toolkit.Input.Keys.Escape)
       {        
         //Close(ModalResult.Cancel);
       }

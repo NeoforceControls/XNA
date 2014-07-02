@@ -25,7 +25,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Microsoft.Xna.Framework.Content;
+using SharpDX.Toolkit.Content;
 using TomShane.Neoforce.External.Zip;
 using System.Globalization;
 ////////////////////////////////////////////////////////////////////////////
@@ -98,33 +98,33 @@ namespace TomShane.Neoforce.Controls
     
     ////////////////////////////////////////////////////////////////////////////        
     /// <include file='Documents/ArchiveManager.xml' path='ArchiveManager/Member[@name="OpenStream"]/*' />
-    protected override Stream OpenStream(string assetName)
-    {
-      if (useArchive && archive != null)
-      {
-        assetName = assetName.Replace("\\", "/");
-        if (assetName.StartsWith("/")) assetName = assetName.Remove(0, 1);
+    //protected override Stream OpenStream(string assetName)
+    //{
+    //  if (useArchive && archive != null)
+    //  {
+    //    assetName = assetName.Replace("\\", "/");
+    //    if (assetName.StartsWith("/")) assetName = assetName.Remove(0, 1);
 
-        string fullAssetName = (assetName + ".xnb").ToLower();
+    //    string fullAssetName = (assetName + ".xnb").ToLower();
 
-        foreach (ZipEntry entry in archive)
-        {
-          ZipDirEntry ze = new ZipDirEntry(entry);
+    //    foreach (ZipEntry entry in archive)
+    //    {
+    //      ZipDirEntry ze = new ZipDirEntry(entry);
           
-          string entryName = entry.FileName.ToLower();
+    //      string entryName = entry.FileName.ToLower();
 
-          if (entryName == fullAssetName)
-          {
-            return entry.GetStream();
-          }
-        }
-        throw new Exception("Cannot find asset \"" + assetName + "\" in the archive.");
-      }
-      else
-      {
-        return base.OpenStream(assetName);
-      }
-    }
+    //      if (entryName == fullAssetName)
+    //      {
+    //        return entry.GetStream();
+    //      }
+    //    }
+    //    throw new Exception("Cannot find asset \"" + assetName + "\" in the archive.");
+    //  }
+    //  else
+    //  {
+    //    return base.OpenStream(assetName);
+    //  }
+    //}
     ////////////////////////////////////////////////////////////////////////////
     
     ////////////////////////////////////////////////////////////////////////////    

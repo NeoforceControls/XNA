@@ -24,7 +24,7 @@
 using System;
 using System.IO;
 using System.Xml;
-using Microsoft.Xna.Framework.Content;
+using SharpDX.Toolkit.Content;
 
 #if (!XBOX && !XBOX_FAKE)
   using System.Windows.Forms;

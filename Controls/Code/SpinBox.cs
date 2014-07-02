@@ -22,9 +22,10 @@
 
 using System.Collections.Generic;
 ////////////////////////////////////////////////////////////////////////////
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Input;
+using SharpDX.Toolkit.Graphics;
+using SharpDX;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -264,7 +265,7 @@ namespace TomShane.Neoforce.Controls
                                      rect.Top + lr.ContentMargins.Top,
                                      Width - lr.ContentMargins.Horizontal - btnDown.Width - btnUp.Width,
                                      Height - lr.ContentMargins.Vertical);
-        renderer.Draw(Manager.Skin.Images["ListBox.Selection"].Resource, rc, Color.FromNonPremultiplied(255, 255, 255, 128));
+        renderer.Draw(Manager.Skin.Images["ListBox.Selection"].Resource, rc, new Color(255, 255, 255, 128));
       }    
     }
     ////////////////////////////////////////////////////////////////////////////    
