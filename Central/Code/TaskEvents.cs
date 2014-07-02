@@ -25,8 +25,8 @@
 using System.Collections.Generic;
 using System.Text;
 using TomShane.Neoforce.Controls;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit;
 using System.Threading;
 ////////////////////////////////////////////////////////////////////////////
 
