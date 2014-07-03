@@ -74,7 +74,7 @@ namespace TomShane.Neoforce.Controls
         
         #if (!XBOX && !XBOX_FAKE)
         
-        string file = content.RootDirectory + asset;
+        string file = content.RootDirectory + asset + ".xml";
         
         if (File.Exists(file))
         {

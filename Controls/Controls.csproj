@@ -227,6 +227,100 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Skins\Default\Cursors\Busy.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Cross.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Default.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\DiagonalLeft.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\DiagonalRight.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Horizontal.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Move.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Text.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Vertical.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <ToolkitTexture Include="Content\Skins\Default\Images\Button.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\CheckBox.Checked.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\CheckBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ComboBox.Button.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ComboBox.ListBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ComboBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ContextMenu.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ContextMenu.Selection.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Control.Outline.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Control.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\GroupBox.Flat.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\GroupBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\GroupPanel.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Icon.Error.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Icon.Information.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Icon.Question.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Icon.Warning.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ListBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ListBox.Selection.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\MainMenu.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\MainMenu.Selection.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ProgressBar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ProgressBar.Scale.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\RadioButton.Checked.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\RadioButton.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.ButtonHorz.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.ButtonVert.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.GlyphHorz.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.GlyphVert.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.RailHorz.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.RailVert.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.ArrowDown.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.ArrowLeft.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.ArrowRight.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.ArrowUp.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.End.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.Glyph.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.Home.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.PageDown.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.PageUp.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Sidebar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\SidebarPanel.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\SpinBox.Button.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\SpinBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\StatusBar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TabControl.Header.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TabControl.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TextBox.Cursor.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TextBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ToolBar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ToolBarButton.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ToolBarPanel.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ToolTip.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TrackBar.Button.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TrackBar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.Caption.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.CloseButton.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.FrameBottom.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.FrameLeft.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.FrameRight.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.FrameTop.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.Icon.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.Shadow.png" />
+    <Content Include="Content\Skins\Default\Skin.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Documents\ArchiveManager.xml" />
     <Content Include="Documents\Button.xml" />
     <Content Include="Documents\ButtonBase.xml" />
@@ -280,6 +374,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ToolkitFont Include="Content\Skins\Default\Fonts\Default.spritefont">
+      <SubType>Designer</SubType>
+    </ToolkitFont>
     <None Include="packages.config" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
