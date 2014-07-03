@@ -60,7 +60,7 @@ namespace TomShane.Neoforce.Central
                
       SystemBorder = true;
       FullScreenBorder = false;
-      ClearBackground = true;              
+      ClearBackground = false;              
       ExitConfirmation = false;      
       Manager.TargetFrames = 60;
       //IsFixedTimeStep = true;

@@ -641,7 +641,7 @@ namespace TomShane.Neoforce.Controls
       AdjustPosition(ref e);
 
       e.Position = RecalcPosition(e.Position);
-      e.State = state; // new MouseState(e.State.LeftButton, e.State.MiddleButton, e.State.RightButton, e.State.XButton1, e.State.XButton2, e.Position.X, e.Position.Y, e.State.WheelDelta);      
+      e.State = new MouseState(e.State.LeftButton, e.State.MiddleButton, e.State.RightButton, e.State.XButton1, e.State.XButton2, e.Position.X, e.Position.Y, e.State.WheelDelta);      
       
       Point pos = RecalcPosition(new Point((int)(mouseState.X * manager.ScreenWidth), (int)(mouseState.Y * manager.ScreenHeight)));                              
       e.Difference = new Point(e.Position.X - pos.X, e.Position.Y - pos.Y);                              
