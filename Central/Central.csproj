@@ -1,28 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ProjectGuid>{0B250074-9AE8-40D0-B84B-A6587A098AFB}</ProjectGuid>
-    <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TomShane.Neoforce.Central</RootNamespace>
     <AssemblyName>TomShane.Neoforce.Central</AssemblyName>
-    <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
-    <XnaPlatform>Windows</XnaPlatform>
     <StartupObject>TomShane.Neoforce.Central.Entry</StartupObject>
     <ApplicationIcon>Resources\Neoforce.ico</ApplicationIcon>
     <Thumbnail>Resources\Logo.png</Thumbnail>
-    <XnaCrossPlatformGroupID>{a2c94e45-329f-41de-a386-8ec9a9c2e443}</XnaCrossPlatformGroupID>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -30,11 +19,7 @@
     </UpgradeBackupLocation>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <XnaUpgrade>
-    </XnaUpgrade>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <XnaOutputType>Game</XnaOutputType>
-    <XnaProfile>Reach</XnaProfile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -73,7 +58,6 @@
     <NoStdLib>true</NoStdLib>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
-    <XnaCompressContent>True</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -228,12 +212,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <NestedContentProject Include="Content\Content.contentproj">
-      <Project>{536f69a2-edea-4d12-a8a9-9aec0ab05538}</Project>
-      <Visible>False</Visible>
-    </NestedContentProject>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -280,11 +258,6 @@
       <Project>{9C8328B3-97FC-4F39-A1BC-6DC4A1730C26}</Project>
       <Name>Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="Content\CentralContent.contentproj">
-      <Project>{536F69A2-EDEA-4D12-A8A9-9AEC0AB05538}</Project>
-      <Name>CentralContent %28Content%29</Name>
-      <XnaReferenceType>Content</XnaReferenceType>
-    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -293,11 +266,11 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <PostBuildEvent>"..\..\..\..\..\tools\buildmarker\BuildMarker.exe" ..\..\..\properties\AssemblyInfo.cs /i</PostBuildEvent>
-  </PropertyGroup>
+  </PropertyGroup>-->
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
+  <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />-->
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
@@ -306,7 +279,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties StartDate="20080911" AssemblyFileVersion="0" AssemblyVersion="1" Reset="0" />
+      <UserProperties Reset="0" AssemblyVersion="1" AssemblyFileVersion="0" StartDate="20080911" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\SharpDX.2.6.2\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.2\build\SharpDX.targets')" />
