@@ -34,6 +34,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>bb6f4266</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,32 +65,25 @@
     <Reference Include="mscorlib">
       <Private>False</Private>
     </Reference>
-    <Reference Include="SharpDX, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SharpDX">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX.Direct3D11, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SharpDX.Direct3D11">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX.DXGI, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SharpDX.DXGI">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.DXGI.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX.Toolkit, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SharpDX.Toolkit">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX.Toolkit.Game, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SharpDX.Toolkit.Game">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Game.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX.Toolkit.Graphics, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SharpDX.Toolkit.Graphics">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Graphics.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX.Toolkit.Input, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SharpDX.Toolkit.Input">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Input.dll</HintPath>
     </Reference>
     <Reference Include="System">
@@ -124,89 +118,111 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ToolkitFont Include="Content2\Fonts\Default.spritefont">
+    <ToolkitFont Include="Content2\Skins\Default\Fonts\Default.spritefont">
       <SubType>Designer</SubType>
     </ToolkitFont>
     <None Include="packages.config" />
     <None Include="Resources\Logo.png" />
-    <Content Include="Content2\Cursors\Busy.cur" />
-    <Content Include="Content2\Cursors\Cross.cur" />
-    <Content Include="Content2\Cursors\Default.cur" />
-    <Content Include="Content2\Cursors\DiagonalLeft.cur" />
-    <Content Include="Content2\Cursors\DiagonalRight.cur" />
-    <Content Include="Content2\Cursors\Horizontal.cur" />
-    <Content Include="Content2\Cursors\Move.cur" />
-    <Content Include="Content2\Cursors\Text.cur" />
-    <Content Include="Content2\Cursors\Vertical.cur" />
-    <ToolkitTexture Include="Content2\Images\Button.png" />
-    <ToolkitTexture Include="Content2\Images\CheckBox.Checked.png" />
-    <ToolkitTexture Include="Content2\Images\CheckBox.png" />
-    <ToolkitTexture Include="Content2\Images\ComboBox.Button.png" />
-    <ToolkitTexture Include="Content2\Images\ComboBox.ListBox.png" />
-    <ToolkitTexture Include="Content2\Images\ComboBox.png" />
-    <ToolkitTexture Include="Content2\Images\ContextMenu.png" />
-    <ToolkitTexture Include="Content2\Images\ContextMenu.Selection.png" />
-    <ToolkitTexture Include="Content2\Images\Control.Outline.png" />
-    <ToolkitTexture Include="Content2\Images\Control.png" />
-    <ToolkitTexture Include="Content2\Images\GroupBox.Flat.png" />
-    <ToolkitTexture Include="Content2\Images\GroupBox.png" />
-    <ToolkitTexture Include="Content2\Images\GroupPanel.png" />
-    <ToolkitTexture Include="Content2\Images\Icon.Error.png" />
-    <ToolkitTexture Include="Content2\Images\Icon.Information.png" />
-    <ToolkitTexture Include="Content2\Images\Icon.Question.png" />
-    <ToolkitTexture Include="Content2\Images\Icon.Warning.png" />
-    <ToolkitTexture Include="Content2\Images\ListBox.png" />
-    <ToolkitTexture Include="Content2\Images\ListBox.Selection.png" />
-    <ToolkitTexture Include="Content2\Images\MainMenu.png" />
-    <ToolkitTexture Include="Content2\Images\MainMenu.Selection.png" />
-    <ToolkitTexture Include="Content2\Images\ProgressBar.png" />
-    <ToolkitTexture Include="Content2\Images\ProgressBar.Scale.png" />
-    <ToolkitTexture Include="Content2\Images\RadioButton.Checked.png" />
-    <ToolkitTexture Include="Content2\Images\RadioButton.png" />
-    <ToolkitTexture Include="Content2\Images\ScrollBar.ButtonHorz.png" />
-    <ToolkitTexture Include="Content2\Images\ScrollBar.ButtonVert.png" />
-    <ToolkitTexture Include="Content2\Images\ScrollBar.GlyphHorz.png" />
-    <ToolkitTexture Include="Content2\Images\ScrollBar.GlyphVert.png" />
-    <ToolkitTexture Include="Content2\Images\ScrollBar.RailHorz.png" />
-    <ToolkitTexture Include="Content2\Images\ScrollBar.RailVert.png" />
-    <ToolkitTexture Include="Content2\Images\Shared.ArrowDown.png" />
-    <ToolkitTexture Include="Content2\Images\Shared.ArrowLeft.png" />
-    <ToolkitTexture Include="Content2\Images\Shared.ArrowRight.png" />
-    <ToolkitTexture Include="Content2\Images\Shared.ArrowUp.png" />
-    <ToolkitTexture Include="Content2\Images\Shared.End.png" />
-    <ToolkitTexture Include="Content2\Images\Shared.Glyph.png" />
-    <ToolkitTexture Include="Content2\Images\Shared.Home.png" />
-    <ToolkitTexture Include="Content2\Images\Shared.PageDown.png" />
-    <ToolkitTexture Include="Content2\Images\Shared.PageUp.png" />
-    <ToolkitTexture Include="Content2\Images\Sidebar.png" />
-    <ToolkitTexture Include="Content2\Images\SidebarPanel.png" />
-    <ToolkitTexture Include="Content2\Images\SpinBox.Button.png" />
-    <ToolkitTexture Include="Content2\Images\SpinBox.png" />
-    <ToolkitTexture Include="Content2\Images\StatusBar.png" />
-    <ToolkitTexture Include="Content2\Images\TabControl.Header.png" />
-    <ToolkitTexture Include="Content2\Images\TabControl.png" />
-    <ToolkitTexture Include="Content2\Images\TextBox.Cursor.png" />
-    <ToolkitTexture Include="Content2\Images\TextBox.png" />
-    <ToolkitTexture Include="Content2\Images\ToolBar.png" />
-    <ToolkitTexture Include="Content2\Images\ToolBarButton.png" />
-    <ToolkitTexture Include="Content2\Images\ToolBarPanel.png" />
-    <ToolkitTexture Include="Content2\Images\ToolTip.png" />
-    <ToolkitTexture Include="Content2\Images\TrackBar.Button.png" />
-    <ToolkitTexture Include="Content2\Images\TrackBar.png" />
-    <ToolkitTexture Include="Content2\Images\Window.Caption.png" />
-    <ToolkitTexture Include="Content2\Images\Window.CloseButton.png" />
-    <ToolkitTexture Include="Content2\Images\Window.FrameBottom.png" />
-    <ToolkitTexture Include="Content2\Images\Window.FrameLeft.png" />
-    <ToolkitTexture Include="Content2\Images\Window.FrameRight.png" />
-    <ToolkitTexture Include="Content2\Images\Window.FrameTop.png" />
-    <ToolkitTexture Include="Content2\Images\Window.Icon.png" />
-    <ToolkitTexture Include="Content2\Images\Window.png" />
-    <ToolkitTexture Include="Content2\Images\Window.Shadow.png" />
-    <Content Include="Content2\Skin.xml" />
+    <Content Include="Content2\Skins\Default\Cursors\Busy.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content2\Skins\Default\Cursors\Cross.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content2\Skins\Default\Cursors\Default.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content2\Skins\Default\Cursors\DiagonalLeft.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content2\Skins\Default\Cursors\DiagonalRight.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content2\Skins\Default\Cursors\Horizontal.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content2\Skins\Default\Cursors\Move.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content2\Skins\Default\Cursors\Text.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content2\Skins\Default\Cursors\Vertical.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Button.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\CheckBox.Checked.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\CheckBox.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ComboBox.Button.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ComboBox.ListBox.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ComboBox.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ContextMenu.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ContextMenu.Selection.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Control.Outline.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Control.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\GroupBox.Flat.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\GroupBox.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\GroupPanel.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Icon.Error.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Icon.Information.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Icon.Question.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Icon.Warning.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ListBox.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ListBox.Selection.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\MainMenu.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\MainMenu.Selection.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ProgressBar.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ProgressBar.Scale.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\RadioButton.Checked.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\RadioButton.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ScrollBar.ButtonHorz.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ScrollBar.ButtonVert.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ScrollBar.GlyphHorz.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ScrollBar.GlyphVert.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ScrollBar.RailHorz.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ScrollBar.RailVert.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Shared.ArrowDown.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Shared.ArrowLeft.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Shared.ArrowRight.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Shared.ArrowUp.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Shared.End.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Shared.Glyph.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Shared.Home.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Shared.PageDown.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Shared.PageUp.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Sidebar.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\SidebarPanel.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\SpinBox.Button.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\SpinBox.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\StatusBar.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\TabControl.Header.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\TabControl.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\TextBox.Cursor.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\TextBox.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ToolBar.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ToolBarButton.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ToolBarPanel.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\ToolTip.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\TrackBar.Button.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\TrackBar.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Window.Caption.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Window.CloseButton.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Window.FrameBottom.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Window.FrameLeft.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Window.FrameRight.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Window.FrameTop.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Window.Icon.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Window.png" />
+    <ToolkitTexture Include="Content2\Skins\Default\Images\Window.Shadow.png" />
+    <Content Include="Content2\Skins\Default\Skin.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <ToolkitTexture Include="Content\Images\Caption.png" />
     <ToolkitTexture Include="Content\Images\Default.png" />
     <ToolkitTexture Include="Content\Images\Green.png" />
-    <Content Include="Content\Layout\Window.xml" />
+    <Content Include="Content\Layout\Window.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Neoforce.ico">
       <Name>Neoforce</Name>
     </Content>
@@ -259,6 +275,7 @@
       <Name>Controls</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -279,9 +296,16 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reset="0" AssemblyVersion="1" AssemblyFileVersion="0" StartDate="20080911" />
+      <UserProperties StartDate="20080911" AssemblyFileVersion="0" AssemblyVersion="1" Reset="0" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\SharpDX.2.6.2\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.2\build\SharpDX.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SharpDX.2.6.2\build\SharpDX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SharpDX.2.6.2\build\SharpDX.targets'))" />
+    <Error Condition="!Exists('..\packages\SharpDX.Toolkit.2.6.2\build\SharpDX.Toolkit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SharpDX.Toolkit.2.6.2\build\SharpDX.Toolkit.targets'))" />
+  </Target>
   <Import Project="..\packages\SharpDX.Toolkit.2.6.2\build\SharpDX.Toolkit.targets" Condition="Exists('..\packages\SharpDX.Toolkit.2.6.2\build\SharpDX.Toolkit.targets')" />
 </Project>

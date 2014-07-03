@@ -67,7 +67,7 @@ namespace TomShane.Neoforce.Controls
     ////////////////////////////////////////////////////////////////////////////        
     internal Version _SkinVersion = new Version(0, 7);
     internal Version _LayoutVersion = new Version(0, 7);    
-    internal const string _SkinDirectory = ".\\Content\\Skins\\";
+    internal const string _SkinDirectory = ".\\Content2\\Skins\\";
     internal const string _LayoutDirectory = ".\\Content\\Layout\\";
     internal const string _DefaultSkin = "Default";
     internal const string _SkinExtension = ".skin";

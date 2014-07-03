@@ -638,7 +638,7 @@ namespace TomShane.Neoforce.Controls
     private string GetFolder()
     {
       string path = Path.GetFullPath(Manager.SkinDirectory) + name + "\\";
-      if (!Directory.Exists(path) || !File.Exists(path + "Skin.xnb"))
+      if (!Directory.Exists(path) || !File.Exists(path + "Skin.xml"))
       {
         path = "";
       }
@@ -857,15 +857,13 @@ namespace TomShane.Neoforce.Controls
         {
           file = GetAddonsFolder() + addon + "\\";
         }        
-        file += "Skin";
+        file += "Skin.xml";
         
         file = archive ? file : Path.GetFullPath(file);       
 
         doc = new SkinXmlDocument();
-        doc.Load(@"D:\Git\NeoforceControls-SharpDX\Central\bin\x86\Release\Content\Skins\Default\Skin.xml");
+        doc.Load(file);
 
-        //doc = content.Load<SkinXmlDocument>(file);        
-        
         XmlElement e = doc["Skin"];        
         if (e != null)
         {                   
