@@ -140,8 +140,89 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ToolkitFont Include="Content2\Fonts\Default.spritefont">
+      <SubType>Designer</SubType>
+    </ToolkitFont>
     <None Include="packages.config" />
     <None Include="Resources\Logo.png" />
+    <Content Include="Content2\Cursors\Busy.cur" />
+    <Content Include="Content2\Cursors\Cross.cur" />
+    <Content Include="Content2\Cursors\Default.cur" />
+    <Content Include="Content2\Cursors\DiagonalLeft.cur" />
+    <Content Include="Content2\Cursors\DiagonalRight.cur" />
+    <Content Include="Content2\Cursors\Horizontal.cur" />
+    <Content Include="Content2\Cursors\Move.cur" />
+    <Content Include="Content2\Cursors\Text.cur" />
+    <Content Include="Content2\Cursors\Vertical.cur" />
+    <ToolkitTexture Include="Content2\Images\Button.png" />
+    <ToolkitTexture Include="Content2\Images\CheckBox.Checked.png" />
+    <ToolkitTexture Include="Content2\Images\CheckBox.png" />
+    <ToolkitTexture Include="Content2\Images\ComboBox.Button.png" />
+    <ToolkitTexture Include="Content2\Images\ComboBox.ListBox.png" />
+    <ToolkitTexture Include="Content2\Images\ComboBox.png" />
+    <ToolkitTexture Include="Content2\Images\ContextMenu.png" />
+    <ToolkitTexture Include="Content2\Images\ContextMenu.Selection.png" />
+    <ToolkitTexture Include="Content2\Images\Control.Outline.png" />
+    <ToolkitTexture Include="Content2\Images\Control.png" />
+    <ToolkitTexture Include="Content2\Images\GroupBox.Flat.png" />
+    <ToolkitTexture Include="Content2\Images\GroupBox.png" />
+    <ToolkitTexture Include="Content2\Images\GroupPanel.png" />
+    <ToolkitTexture Include="Content2\Images\Icon.Error.png" />
+    <ToolkitTexture Include="Content2\Images\Icon.Information.png" />
+    <ToolkitTexture Include="Content2\Images\Icon.Question.png" />
+    <ToolkitTexture Include="Content2\Images\Icon.Warning.png" />
+    <ToolkitTexture Include="Content2\Images\ListBox.png" />
+    <ToolkitTexture Include="Content2\Images\ListBox.Selection.png" />
+    <ToolkitTexture Include="Content2\Images\MainMenu.png" />
+    <ToolkitTexture Include="Content2\Images\MainMenu.Selection.png" />
+    <ToolkitTexture Include="Content2\Images\ProgressBar.png" />
+    <ToolkitTexture Include="Content2\Images\ProgressBar.Scale.png" />
+    <ToolkitTexture Include="Content2\Images\RadioButton.Checked.png" />
+    <ToolkitTexture Include="Content2\Images\RadioButton.png" />
+    <ToolkitTexture Include="Content2\Images\ScrollBar.ButtonHorz.png" />
+    <ToolkitTexture Include="Content2\Images\ScrollBar.ButtonVert.png" />
+    <ToolkitTexture Include="Content2\Images\ScrollBar.GlyphHorz.png" />
+    <ToolkitTexture Include="Content2\Images\ScrollBar.GlyphVert.png" />
+    <ToolkitTexture Include="Content2\Images\ScrollBar.RailHorz.png" />
+    <ToolkitTexture Include="Content2\Images\ScrollBar.RailVert.png" />
+    <ToolkitTexture Include="Content2\Images\Shared.ArrowDown.png" />
+    <ToolkitTexture Include="Content2\Images\Shared.ArrowLeft.png" />
+    <ToolkitTexture Include="Content2\Images\Shared.ArrowRight.png" />
+    <ToolkitTexture Include="Content2\Images\Shared.ArrowUp.png" />
+    <ToolkitTexture Include="Content2\Images\Shared.End.png" />
+    <ToolkitTexture Include="Content2\Images\Shared.Glyph.png" />
+    <ToolkitTexture Include="Content2\Images\Shared.Home.png" />
+    <ToolkitTexture Include="Content2\Images\Shared.PageDown.png" />
+    <ToolkitTexture Include="Content2\Images\Shared.PageUp.png" />
+    <ToolkitTexture Include="Content2\Images\Sidebar.png" />
+    <ToolkitTexture Include="Content2\Images\SidebarPanel.png" />
+    <ToolkitTexture Include="Content2\Images\SpinBox.Button.png" />
+    <ToolkitTexture Include="Content2\Images\SpinBox.png" />
+    <ToolkitTexture Include="Content2\Images\StatusBar.png" />
+    <ToolkitTexture Include="Content2\Images\TabControl.Header.png" />
+    <ToolkitTexture Include="Content2\Images\TabControl.png" />
+    <ToolkitTexture Include="Content2\Images\TextBox.Cursor.png" />
+    <ToolkitTexture Include="Content2\Images\TextBox.png" />
+    <ToolkitTexture Include="Content2\Images\ToolBar.png" />
+    <ToolkitTexture Include="Content2\Images\ToolBarButton.png" />
+    <ToolkitTexture Include="Content2\Images\ToolBarPanel.png" />
+    <ToolkitTexture Include="Content2\Images\ToolTip.png" />
+    <ToolkitTexture Include="Content2\Images\TrackBar.Button.png" />
+    <ToolkitTexture Include="Content2\Images\TrackBar.png" />
+    <ToolkitTexture Include="Content2\Images\Window.Caption.png" />
+    <ToolkitTexture Include="Content2\Images\Window.CloseButton.png" />
+    <ToolkitTexture Include="Content2\Images\Window.FrameBottom.png" />
+    <ToolkitTexture Include="Content2\Images\Window.FrameLeft.png" />
+    <ToolkitTexture Include="Content2\Images\Window.FrameRight.png" />
+    <ToolkitTexture Include="Content2\Images\Window.FrameTop.png" />
+    <ToolkitTexture Include="Content2\Images\Window.Icon.png" />
+    <ToolkitTexture Include="Content2\Images\Window.png" />
+    <ToolkitTexture Include="Content2\Images\Window.Shadow.png" />
+    <Content Include="Content2\Skin.xml" />
+    <ToolkitTexture Include="Content\Images\Caption.png" />
+    <ToolkitTexture Include="Content\Images\Default.png" />
+    <ToolkitTexture Include="Content\Images\Green.png" />
+    <Content Include="Content\Layout\Window.xml" />
     <Content Include="Resources\Neoforce.ico">
       <Name>Neoforce</Name>
     </Content>
@@ -225,7 +306,7 @@
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reset="0" AssemblyVersion="1" AssemblyFileVersion="0" StartDate="20080911" />
+      <UserProperties StartDate="20080911" AssemblyFileVersion="0" AssemblyVersion="1" Reset="0" />
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="..\packages\SharpDX.2.6.2\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.2\build\SharpDX.targets')" />

@@ -31,6 +31,7 @@ using SharpDX.Toolkit;
 #if (!XBOX && !XBOX_FAKE)
   using System.Windows.Forms;
 using SharpDX;
+using System.Reflection;
 #endif
 ////////////////////////////////////////////////////////////////////////////
 
@@ -551,8 +552,12 @@ namespace TomShane.Neoforce.Controls
     public Skin(Manager manager, string name): base(manager)
     {
       this.name = name;
-      content = new ArchiveManager(Manager.Game.Services, GetArchiveLocation(name + Manager.SkinExtension));      
-      content.RootDirectory = GetFolder();
+      content = new ArchiveManager(Manager.Game.Services, GetArchiveLocation(name + Manager.SkinExtension));
+      content.RootDirectory = "Content2"; // GetFolder();
+
+
+      content.Resolvers.Add(new SharpDX.Toolkit.Content.FileSystemContentResolver(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)));
+
       doc = new SkinXmlDocument();      
       controls = new SkinList<SkinControl>(); 
       fonts = new SkinList<SkinFont>();
@@ -676,7 +681,10 @@ namespace TomShane.Neoforce.Controls
       return ret;
     }    
     ////////////////////////////////////////////////////////////////////////////     
-    
+    public class CursorFile
+    {
+        public byte[] Data = null;
+    }
     ////////////////////////////////////////////////////////////////////////////
     public override void Init()
     {
@@ -696,7 +704,9 @@ namespace TomShane.Neoforce.Controls
           content.UseArchive = cursors[i].Archive;
           string asset = GetAsset("Cursors", cursors[i].Asset, cursors[i].Addon);
           asset = content.UseArchive ? asset : Path.GetFullPath(asset);     
-          cursors[i].Resource = content.Load<Cursor>(asset);        
+          //cursors[i].Resource = content.Load<Cursor>(asset);
+
+          cursors[i].Resource = Cursor.Current; // new Cursor(content.RootDirectory + "\\" + asset + ".cur");
         }
       #endif  
       
@@ -849,7 +859,11 @@ namespace TomShane.Neoforce.Controls
         file += "Skin";
         
         file = archive ? file : Path.GetFullPath(file);       
-        doc = content.Load<SkinXmlDocument>(file);        
+
+        doc = new SkinXmlDocument();
+        doc.Load(@"D:\Git\NeoforceControls-SharpDX\Central\bin\x86\Release\Content\Skins\Default\Skin.xml");
+
+        //doc = content.Load<SkinXmlDocument>(file);        
         
         XmlElement e = doc["Skin"];        
         if (e != null)

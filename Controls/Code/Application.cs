@@ -169,7 +169,7 @@ namespace TomShane.Neoforce.Controls
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 768;
-            graphics.PreferredBackBufferFormat = PixelFormat.R8G8B8A8.UInt;
+            graphics.PreferredBackBufferFormat = PixelFormat.R8G8B8A8.UNorm;
             graphics.IsFullScreen = false;
             graphics.PreferMultiSampling = false;
             graphics.SynchronizeWithVerticalRetrace = false;
@@ -183,6 +183,8 @@ namespace TomShane.Neoforce.Controls
             manager.AutoCreateRenderTarget = false;
             manager.TargetFrames = 60;
             manager.WindowClosing += new WindowClosingEventHandler(Manager_WindowClosing);
+
+            Content.RootDirectory = "Content2";
         }
         ////////////////////////////////////////////////////////////////////////////                      
 
@@ -400,22 +402,22 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////////////////////////////////////////////////////	  
-        public new void Run()
-        {
-            // try
-            {
-                base.Run();
-            }
-            /* catch (Exception x)
-             {
-              #if (!XBOX && !XBOX_FAKE)         
-                MessageBox.Show("An unhandled exception has occurred.\n" + x.Message, Window.Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Manager.LogException(x);
-              #else
-                throw x;
-              #endif 
-             }*/
-        }
+        //public new void Run()
+        //{
+        //    // try
+        //    {
+        //        base.Run();
+        //    }
+        //    /* catch (Exception x)
+        //     {
+        //      #if (!XBOX && !XBOX_FAKE)         
+        //        MessageBox.Show("An unhandled exception has occurred.\n" + x.Message, Window.Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        Manager.LogException(x);
+        //      #else
+        //        throw x;
+        //      #endif 
+        //     }*/
+        //}
         ////////////////////////////////////////////////////////////////////////////	  
 
         #endregion

@@ -1462,7 +1462,7 @@ namespace TomShane.Neoforce.Controls
                                     width,
                                     height,
               //false,
-                                    PixelFormat.R8G8B8A8.UInt);
+                                    PixelFormat.R8G8B8A8.UNorm);
                                   //DepthFormat.None,
                                   //Manager.GraphicsDevice.Presenter.Description.MultiSampleCount,
                                   //Manager._RenderTargetUsage);                                  
@@ -1507,7 +1507,7 @@ namespace TomShane.Neoforce.Controls
             Rectangle rect = new Rectangle(0, 0, OriginWidth, OriginHeight);   
             DrawControls(renderer, rect, gameTime, false);                     
             
-            Manager.GraphicsDevice.ClearState(); //.SetRenderTargets(null);                        
+            Manager.GraphicsDevice.SetRenderTargets();                        
           }
           invalidated = false;
         }

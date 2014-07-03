@@ -49,13 +49,9 @@ namespace TomShane.Neoforce.Controls
 
         public DeviceStates(GraphicsDevice GraphicsDevice)
         {
-
-            BlendState = BlendState.New(GraphicsDevice, GraphicsDevice.BlendStates.AlphaBlend.Description);
-
-            RasterizerState = RasterizerState.New(GraphicsDevice, GraphicsDevice.RasterizerStates.CullNone.Description);
-
-            SamplerState = SamplerState.New(GraphicsDevice, GraphicsDevice.SamplerStates.AnisotropicClamp.Description);
-
+            BlendState = GraphicsDevice.BlendStates.NonPremultiplied;
+            RasterizerState = GraphicsDevice.RasterizerStates.CullNone;
+            SamplerState = GraphicsDevice.SamplerStates.AnisotropicClamp;
             DepthStencilState = GraphicsDevice.DepthStencilStates.None;
         }
     }
@@ -141,8 +137,7 @@ namespace TomShane.Neoforce.Controls
             }
             else
             {
-                //BlendState.Opaque
-                sb.Begin(SpriteSortMode.Immediate, states.BlendState, states.SamplerState, states.DepthStencilState, states.RasterizerState);
+                sb.Begin(SpriteSortMode.Immediate, Manager.GraphicsDevice.BlendStates.Opaque, states.SamplerState, states.DepthStencilState, states.RasterizerState);
             }
         }
         ////////////////////////////////////////////////////////////////////////////
@@ -324,6 +319,10 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////
         public virtual void DrawString(SpriteFont font, string text, Rectangle rect, Color color, Alignment alignment, int offsetX, int offsetY, bool ellipsis)
         {
+            if (text == null)
+            {
+                return;
+            }
 
             if (ellipsis)
             {

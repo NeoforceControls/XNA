@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TkFont>
+  <FontName>Tahoma</FontName>
+  <Size>8</Size>
+  <Spacing>1</Spacing>
+  <LineSpacing>0</LineSpacing>
+  <UseKerning>false</UseKerning>
+  <Format>Auto</Format>
+  <CharacterRegions>
+    <CharacterRegion>
+      <Start>32</Start>
+      <End>903</End>
+    </CharacterRegion>
+    <CharacterRegion>
+      <Start>8226</Start>
+      <End>8226</End>
+    </CharacterRegion>
+  </CharacterRegions>
+  <DefaultCharacter>32</DefaultCharacter>
+  <Style>Bold</Style>
+  <NoPremultiply>false</NoPremultiply>
+</TkFont>

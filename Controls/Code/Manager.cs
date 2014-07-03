@@ -625,7 +625,7 @@ namespace TomShane.Neoforce.Controls
     {
       disposing = false;
       
-      AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleUnhadledExceptions);
+      //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleUnhadledExceptions);
     
       #if (!XBOX && !XBOX_FAKE)
         menuDelay = SystemInformation.MenuShowDelay;
@@ -638,6 +638,13 @@ namespace TomShane.Neoforce.Controls
       #endif
       
       content = new ArchiveManager(Game.Services);
+
+      content.RootDirectory = ""; // GetFolder();
+
+
+      content.Resolvers.Add(new SharpDX.Toolkit.Content.FileSystemContentResolver(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)));
+
+
       input = new InputSystem(this, new InputOffset(0, 0, 1f, 1f));
       components = new List<Component>();
       controls = new ControlsList();
@@ -931,7 +938,7 @@ namespace TomShane.Neoforce.Controls
     public virtual RenderTarget2D CreateRenderTarget(int width, int height)
     {
       Input.InputOffset = new InputOffset(0, 0, ScreenWidth / (float)width, ScreenHeight / (float)height);
-      return RenderTarget2D.New(GraphicsDevice, width, height, SharpDX.Toolkit.Graphics.PixelFormat.R8G8B8A8.UInt);      
+      return RenderTarget2D.New(GraphicsDevice, width, height, SharpDX.Toolkit.Graphics.PixelFormat.R8G8B8A8.UNorm);      
     }
     ////////////////////////////////////////////////////////////////////////////
 
@@ -1233,7 +1240,7 @@ namespace TomShane.Neoforce.Controls
             }
           }                             
         
-          GraphicsDevice.ClearState(); //.SetRenderTarget(null);
+          GraphicsDevice.SetRenderTargets();
         }  
       } 
       else
@@ -1289,13 +1296,13 @@ namespace TomShane.Neoforce.Controls
     ////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////     
-    private void HandleUnhadledExceptions(object sender, UnhandledExceptionEventArgs e)
-    {
-      if (LogUnhandledExceptions)
-      {
-        LogException(e.ExceptionObject as Exception);
-      }
-    }
+    //private void HandleUnhadledExceptions(object sender, UnhandledExceptionEventArgs e)
+    //{
+    //  if (LogUnhandledExceptions)
+    //  {
+    //    LogException(e.ExceptionObject as Exception);
+    //  }
+    //}
     ////////////////////////////////////////////////////////////////////////////     
     
     ////////////////////////////////////////////////////////////////////////////     
