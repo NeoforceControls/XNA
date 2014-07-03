@@ -651,7 +651,7 @@ namespace TomShane.Neoforce.Controls
       orderList = new ControlsList();
 
       this.graphics = graphics;
-      //graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(PrepareGraphicsDevice);      
+      graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(PrepareGraphicsDevice);      
 
       skinName = skin;           
       
@@ -861,7 +861,7 @@ namespace TomShane.Neoforce.Controls
     /// </summary>
     protected virtual void PrepareGraphicsDevice(object sender, PreparingDeviceSettingsEventArgs e)
     {
-        e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = _RenderTargetUsage;
+        //e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = _RenderTargetUsage;
       int w = e.GraphicsDeviceInformation.PresentationParameters.BackBufferWidth;
       int h = e.GraphicsDeviceInformation.PresentationParameters.BackBufferHeight;
                   

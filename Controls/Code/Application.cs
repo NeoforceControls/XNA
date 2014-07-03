@@ -173,8 +173,7 @@ namespace TomShane.Neoforce.Controls
             graphics.IsFullScreen = false;
             graphics.PreferMultiSampling = false;
             graphics.SynchronizeWithVerticalRetrace = false;
-            //TODO: Hookup this event
-            //graphics.DeviceReset += new EventHandler<System.EventArgs>(Graphics_DeviceReset);
+            graphics.DeviceChangeEnd += new EventHandler<System.EventArgs>(Graphics_DeviceReset);
 
             IsFixedTimeStep = false;
             IsMouseVisible = true;
@@ -374,8 +373,8 @@ namespace TomShane.Neoforce.Controls
             if (Manager.RenderTarget != null)
             {
                 //These steps are already done by the manager on Graphics Device Reset.
-                //Manager.RenderTarget.Dispose();
-                //Manager.RenderTarget = CreateRenderTarget(); 
+                Manager.RenderTarget.Dispose();
+                Manager.RenderTarget = CreateRenderTarget(); 
                 Manager.Input.InputOffset = new InputOffset(0, 0, Manager.ScreenWidth / (float)Manager.TargetWidth, Manager.ScreenHeight / (float)Manager.TargetHeight);
             }
 

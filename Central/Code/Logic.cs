@@ -66,10 +66,13 @@ namespace TomShane.Neoforce.Central
       {
         if (list[i] is Window)
         {
-          if (((Window)list[i]).Text.Substring(0, 6) == "Window")
-          {
-            (list[i] as Window).Dispose();            
-          }
+            if (!string.IsNullOrEmpty(((Window)list[i]).Text)) 
+            {
+              if (((Window)list[i]).Text.Substring(0, 6) == "Window")
+              {
+                (list[i] as Window).Dispose();            
+              }
+            }
         }
       }
       list.Clear();
