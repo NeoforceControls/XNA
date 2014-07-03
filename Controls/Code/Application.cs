@@ -46,7 +46,7 @@ namespace TomShane.Neoforce.Controls
         private Manager manager;
         private SpriteBatch sprite;
         private bool clearBackground = false;
-        private Color backgroundColor = Color.Black;
+        private Color backgroundColor = Color.CornflowerBlue;
         private Texture2D backgroundImage;
         private Window mainWindow;
         private bool appWindow = false;

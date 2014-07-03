@@ -58,9 +58,9 @@ namespace TomShane.Neoforce.Central
     public Central(): base(true)
     {                                   
                
-      SystemBorder = false;
+      SystemBorder = true;
       FullScreenBorder = false;
-      ClearBackground = false;              
+      ClearBackground = true;              
       ExitConfirmation = false;      
       Manager.TargetFrames = 60;
       //IsFixedTimeStep = true;

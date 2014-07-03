@@ -651,7 +651,7 @@ namespace TomShane.Neoforce.Controls
       orderList = new ControlsList();
 
       this.graphics = graphics;
-      graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(PrepareGraphicsDevice);      
+      //graphics.PreparingDeviceSettings += new EventHandler<PreparingDeviceSettingsEventArgs>(PrepareGraphicsDevice);      
 
       skinName = skin;           
       
