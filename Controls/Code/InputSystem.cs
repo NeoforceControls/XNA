@@ -641,7 +641,7 @@ namespace TomShane.Neoforce.Controls
       AdjustPosition(ref e);
 
       e.Position = RecalcPosition(e.Position);
-      e.State = new MouseState(e.State.LeftButton, e.State.MiddleButton, e.State.RightButton, e.State.XButton1, e.State.XButton2, e.Position.X, e.Position.Y, e.State.WheelDelta);      
+      e.State = state; // new MouseState(e.State.LeftButton, e.State.MiddleButton, e.State.RightButton, e.State.XButton1, e.State.XButton2, e.Position.X, e.Position.Y, e.State.WheelDelta);      
       
       Point pos = RecalcPosition(new Point((int)(mouseState.X * manager.ScreenWidth), (int)(mouseState.Y * manager.ScreenHeight)));                              
       e.Difference = new Point(e.Position.X - pos.X, e.Position.Y - pos.Y);                              
@@ -664,12 +664,12 @@ namespace TomShane.Neoforce.Controls
       {
         MouseEventArgs e = new MouseEventArgs();          
         
-        MouseButton btn = MouseButton.None;       
-        if (state.LeftButton.Pressed) btn = MouseButton.Left;
-        else if (state.RightButton.Pressed) btn = MouseButton.Right;
-        else if (state.MiddleButton.Pressed) btn = MouseButton.Middle;
-        else if (state.XButton1.Pressed) btn = MouseButton.XButton1;
-        else if (state.XButton2.Pressed) btn = MouseButton.XButton2;
+        MouseButton btn = MouseButton.None;
+        if (state.LeftButton.Down) btn = MouseButton.Left;
+        else if (state.RightButton.Down) btn = MouseButton.Right;
+        else if (state.MiddleButton.Down) btn = MouseButton.Middle;
+        else if (state.XButton1.Down) btn = MouseButton.XButton1;
+        else if (state.XButton2.Down) btn = MouseButton.XButton2;
         
         BuildMouseEvent(state, btn, ref e);
         if (MouseMove != null) 
@@ -718,7 +718,7 @@ namespace TomShane.Neoforce.Controls
         else if (btn.Button == MouseButton.XButton2) bs = state.XButton2;
         else continue;
       
-        bool pressed = (bs.Pressed);                
+        bool pressed = (bs.Down);                
         if (pressed)
         {
           double ms = gameTime.ElapsedGameTime.TotalMilliseconds;          
