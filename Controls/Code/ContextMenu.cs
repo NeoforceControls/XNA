@@ -308,7 +308,7 @@ namespace TomShane.Neoforce.Controls
     {
       base.OnMouseOut(e);
 
-      if (!CheckArea(e.State.Absolute().X, e.State.Absolute().Y) && ChildMenu == null)
+      if (!CheckArea((int)e.State.X, (int)e.State.Y) && ChildMenu == null)
       {
         ItemIndex = -1;
       }  

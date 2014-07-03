@@ -182,7 +182,7 @@ namespace TomShane.Neoforce.Controls
       base.OnMouseMove(e);
       int i = lastIndex;
 
-      TrackItem(e.State.Absolute().X - Root.AbsoluteLeft, e.State.Absolute().Y - Root.AbsoluteTop);
+      TrackItem((int)e.State.X - Root.AbsoluteLeft, (int)e.State.Y - Root.AbsoluteTop);
 
       if (ItemIndex >= 0 && (i == -1 || i != ItemIndex) && Items[ItemIndex].Items != null && Items[ItemIndex].Items.Count > 0 && ChildMenu != null)
       {                               

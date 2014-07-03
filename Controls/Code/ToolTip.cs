@@ -52,8 +52,8 @@ namespace TomShane.Neoforce.Controls
           Vector2 size = Skin.Layers[0].Text.Font.Resource.MeasureString(Text);
           Width = (int)size.X + Skin.Layers[0].ContentMargins.Horizontal;
           Height = (int)size.Y + Skin.Layers[0].ContentMargins.Vertical;
-          Left = this.Manager.MouseManager.GetState().Absolute().X;
-          Top = this.Manager.MouseManager.GetState().Absolute().Y + 24;
+          Left = (int)this.Manager.MouseManager.GetState().X;
+          Top = (int)this.Manager.MouseManager.GetState().Y + 24;
           base.Visible = value;
         }
         else

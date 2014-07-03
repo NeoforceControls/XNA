@@ -221,7 +221,6 @@
     <Compile Include="External\Zip\ZipEntry.cs" />
     <Compile Include="External\Zip\ZipFile.cs" />
     <Compile Include="GamePadState.cs" />
-    <Compile Include="MouseStateExtentions.cs" />
     <Compile Include="PlayerIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <Name>AssemblyInfo</Name>
