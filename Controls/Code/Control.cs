@@ -1824,7 +1824,11 @@ namespace TomShane.Neoforce.Controls
       {
         renderer.Draw(Manager.Skin.Images["Control"].Resource, rect, backColor);
       }
-      renderer.DrawLayer(this, skin.Layers[0], rect);
+
+      if (skin.Layers.Count > 0)
+      {
+          renderer.DrawLayer(this, skin.Layers[0], rect);
+      }
     }
     ////////////////////////////////////////////////////////////////////////////
 
