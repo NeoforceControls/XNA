@@ -177,7 +177,7 @@ namespace TomShane.Neoforce.Controls
         if (Items[i].Image != null)
         {                     
           Rectangle r = new Rectangle(rect.Left + l1.ContentMargins.Left + 3, 
-                                      rect.Top + top + 3, 
+                                      rect.Top + 3, 
                                       LineHeight() - 6, 
                                       LineHeight() - 6);
           renderer.Draw(Items[i].Image, r, Color.White);
