@@ -163,8 +163,8 @@ namespace TomShane.Neoforce.Controls
         }
         else if (sizeMode == SizeMode.Centered)
         {
-          int x = (rect.Width / 2) - (image.Width / 2);
-          int y = (rect.Height / 2) - (image.Height / 2);
+        int x = rect.X + (rect.Width / 2) - (image.Width / 2);
+        int y = rect.Y + (rect.Height / 2) - (image.Height / 2);
           
           renderer.Draw(image, x, y, sourceRect, Color);
         }
