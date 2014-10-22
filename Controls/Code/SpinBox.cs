@@ -192,6 +192,14 @@ namespace TomShane.Neoforce.Controls
     }
     ////////////////////////////////////////////////////////////////////////////
 
+    ////////////////////////////////////////////////////////////////////////////
+    public string DisplayFormat
+    {
+        get;
+        set;
+    }
+    ////////////////////////////////////////////////////////////////////////////
+
     #endregion
 
     #region //// Construstors //////
@@ -200,7 +208,8 @@ namespace TomShane.Neoforce.Controls
     public SpinBox(Manager manager, SpinBoxMode mode): base(manager)
     {         
       this.mode = mode;
-      ReadOnly = true;      
+      ReadOnly = true;
+      DisplayFormat = "n";
       
       Height = 20;
       Width = 64;           
@@ -327,7 +336,7 @@ namespace TomShane.Neoforce.Controls
         if (value < minimum) value = minimum;
         if (value > maximum) value = maximum;
 
-        Text = value.ToString("n" + rounding.ToString());
+        Text = value.ToString(DisplayFormat + rounding.ToString());
       }
     }
     ////////////////////////////////////////////////////////////////////////////
