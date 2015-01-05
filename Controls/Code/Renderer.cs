@@ -22,8 +22,9 @@
 
 ////////////////////////////////////////////////////////////////////////////
 using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
+using SharpDX;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -46,43 +47,12 @@ namespace TomShane.Neoforce.Controls
         public readonly DepthStencilState DepthStencilState;
         public readonly SamplerState SamplerState;
 
-        public DeviceStates()
+        public DeviceStates(GraphicsDevice GraphicsDevice)
         {
-            BlendState = new BlendState();
-            BlendState.AlphaBlendFunction = BlendState.AlphaBlend.AlphaBlendFunction;
-            BlendState.AlphaDestinationBlend = BlendState.AlphaBlend.AlphaDestinationBlend;
-            BlendState.AlphaSourceBlend = BlendState.AlphaBlend.AlphaSourceBlend;
-            BlendState.BlendFactor = BlendState.AlphaBlend.BlendFactor;
-            BlendState.ColorBlendFunction = BlendState.AlphaBlend.ColorBlendFunction;
-            BlendState.ColorDestinationBlend = BlendState.AlphaBlend.ColorDestinationBlend;
-            BlendState.ColorSourceBlend = BlendState.AlphaBlend.ColorSourceBlend;
-            BlendState.ColorWriteChannels = BlendState.AlphaBlend.ColorWriteChannels;
-            BlendState.ColorWriteChannels1 = BlendState.AlphaBlend.ColorWriteChannels1;
-            BlendState.ColorWriteChannels2 = BlendState.AlphaBlend.ColorWriteChannels2;
-            BlendState.ColorWriteChannels3 = BlendState.AlphaBlend.ColorWriteChannels3;
-            BlendState.MultiSampleMask = BlendState.AlphaBlend.MultiSampleMask;
-
-            RasterizerState = new RasterizerState();
-            RasterizerState.CullMode = RasterizerState.CullNone.CullMode;
-            RasterizerState.DepthBias = RasterizerState.CullNone.DepthBias;
-            RasterizerState.FillMode = RasterizerState.CullNone.FillMode;
-            RasterizerState.MultiSampleAntiAlias = RasterizerState.CullNone.MultiSampleAntiAlias;
-            RasterizerState.ScissorTestEnable = RasterizerState.CullNone.ScissorTestEnable;
-            RasterizerState.SlopeScaleDepthBias = RasterizerState.CullNone.SlopeScaleDepthBias;
-
-            RasterizerState.ScissorTestEnable = true;
-
-            SamplerState = new SamplerState();
-            SamplerState.AddressU = SamplerState.AnisotropicClamp.AddressU;
-            SamplerState.AddressV = SamplerState.AnisotropicClamp.AddressV;
-            SamplerState.AddressW = SamplerState.AnisotropicClamp.AddressW;
-            SamplerState.Filter = SamplerState.AnisotropicClamp.Filter;
-            SamplerState.MaxAnisotropy = SamplerState.AnisotropicClamp.MaxAnisotropy;
-            SamplerState.MaxMipLevel = SamplerState.AnisotropicClamp.MaxMipLevel;
-            SamplerState.MipMapLevelOfDetailBias = SamplerState.AnisotropicClamp.MipMapLevelOfDetailBias;
-
-            DepthStencilState = new DepthStencilState();
-            DepthStencilState = DepthStencilState.None;
+            BlendState = GraphicsDevice.BlendStates.NonPremultiplied;
+            RasterizerState = GraphicsDevice.RasterizerStates.CullNone;
+            SamplerState = GraphicsDevice.SamplerStates.AnisotropicClamp;
+            DepthStencilState = GraphicsDevice.DepthStencilStates.None;
         }
     }
     ////////////////////////////////////////////////////////////////////////////
@@ -96,7 +66,7 @@ namespace TomShane.Neoforce.Controls
 
         ////////////////////////////////////////////////////////////////////////////
         private SpriteBatch sb = null;
-        private DeviceStates states = new DeviceStates();
+        private DeviceStates states = null;
         private BlendingMode bmode = BlendingMode.Default;
         ////////////////////////////////////////////////////////////////////////////
 
@@ -123,6 +93,7 @@ namespace TomShane.Neoforce.Controls
             : base(manager)
         {
             sb = new SpriteBatch(Manager.GraphicsDevice);
+            states = new DeviceStates(Manager.GraphicsDevice);
         }
         ////////////////////////////////////////////////////////////////////////////
 
@@ -166,7 +137,7 @@ namespace TomShane.Neoforce.Controls
             }
             else
             {
-                sb.Begin(SpriteSortMode.Immediate, BlendState.Opaque, states.SamplerState, states.DepthStencilState, states.RasterizerState);
+                sb.Begin(SpriteSortMode.Immediate, Manager.GraphicsDevice.BlendStates.Opaque, states.SamplerState, states.DepthStencilState, states.RasterizerState);
             }
         }
         ////////////////////////////////////////////////////////////////////////////
@@ -179,7 +150,7 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////////////////////////////////////////////////////
-        public virtual void Draw(Texture2D texture, Rectangle destination, Color color)
+        public virtual void Draw(Texture2DBase texture, Rectangle destination, Color color)
         {
             if (destination.Width > 0 && destination.Height > 0)
             {
@@ -188,13 +159,14 @@ namespace TomShane.Neoforce.Controls
         }
         ////////////////////////////////////////////////////////////////////////////
 
-        public virtual void DrawTileTexture(Texture2D texture, Rectangle destination, Color color)
+        public virtual void DrawTileTexture(Texture2DBase texture, Rectangle destination, Color color)
         {
             if (destination.Width > 0 && destination.Height > 0)
             {
                 End();
 
-                sb.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone);
+                //sb.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend, SamplerState.LinearWrap, DepthStencilState.Default, RasterizerState.CullNone);
+                sb.Begin();
 
                 sb.Draw(texture, new Vector2(destination.X,destination.Y), destination, color, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
@@ -204,7 +176,7 @@ namespace TomShane.Neoforce.Controls
         }
 
         ////////////////////////////////////////////////////////////////////////////
-        public virtual void Draw(Texture2D texture, Rectangle destination, Rectangle source, Color color)
+        public virtual void Draw(Texture2DBase texture, Rectangle destination, Rectangle source, Color color)
         {
             if (source.Width > 0 && source.Height > 0 && destination.Width > 0 && destination.Height > 0)
             {
@@ -214,14 +186,14 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////////////////////////////////////////////////////
-        public virtual void Draw(Texture2D texture, int left, int top, Color color)
+        public virtual void Draw(Texture2DBase texture, int left, int top, Color color)
         {
             sb.Draw(texture, new Vector2(left, top), null, color, 0.0f, Vector2.Zero, 1.0f, SpriteEffects.None, Manager.GlobalDepth);
         }
         ////////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////////////////////////////////////////////////////
-        public virtual void Draw(Texture2D texture, int left, int top, Rectangle source, Color color)
+        public virtual void Draw(Texture2DBase texture, int left, int top, Rectangle source, Color color)
         {
             if (source.Width > 0 && source.Height > 0)
             {
@@ -347,6 +319,10 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////
         public virtual void DrawString(SpriteFont font, string text, Rectangle rect, Color color, Alignment alignment, int offsetX, int offsetY, bool ellipsis)
         {
+            if (text == null)
+            {
+                return;
+            }
 
             if (ellipsis)
             {

@@ -1,27 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ProjectGuid>{9C8328B3-97FC-4F39-A1BC-6DC4A1730C26}</ProjectGuid>
-    <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TomShane.Neoforce.Controls</RootNamespace>
-    <AssemblyName>TomShane.Neoforce.Controls</AssemblyName>
-    <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
-    <XnaPlatform>Windows</XnaPlatform>
+    <AssemblyName>TomShane.Neoforce.Controls.SharpDX</AssemblyName>
     <ApplicationIcon>Resources\Neoforce.ico</ApplicationIcon>
-    <Thumbnail>Resources\Logo.png</Thumbnail>
-    <XnaCrossPlatformGroupID>{92021ed2-859a-477f-9741-470035e41fe7}</XnaCrossPlatformGroupID>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
@@ -33,11 +21,7 @@
     </UpgradeBackupLocation>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <XnaUpgrade>
-    </XnaUpgrade>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <XnaOutputType>Library</XnaOutputType>
-    <XnaProfile>Reach</XnaProfile>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -52,6 +36,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>e9073082</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,12 +52,11 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <DocumentationFile>
     </DocumentationFile>
-    <XnaCompressContent>False</XnaCompressContent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\x86\Release</OutputPath>
+    <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -81,15 +65,42 @@
     <PlatformTarget>x86</PlatformTarget>
     <DocumentationFile>
     </DocumentationFile>
-    <XnaCompressContent>True</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
-    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
-    <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="mscorlib">
       <Private>False</Private>
+    </Reference>
+    <Reference Include="SharpDX, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D11, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Direct3D11.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DXGI, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit.Game, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit.Graphics, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit.Input, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput, Version=2.6.2.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.XInput.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>False</Private>
@@ -201,17 +212,115 @@
     <Compile Include="Code\Window.cs">
       <Name>UnitWindow</Name>
     </Compile>
+    <Compile Include="ContentReader.cs" />
+    <Compile Include="ContentTypeReader.cs" />
     <Compile Include="External\Zip\Crc32.cs" />
     <Compile Include="External\Zip\Shared.cs" />
     <Compile Include="Code\ArchiveManager.cs" />
     <Compile Include="External\Zip\ZipDirEntry.cs" />
     <Compile Include="External\Zip\ZipEntry.cs" />
     <Compile Include="External\Zip\ZipFile.cs" />
+    <Compile Include="GamePadState.cs" />
+    <Compile Include="PlayerIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <Name>AssemblyInfo</Name>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Skins\Default\Cursors\Busy.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Cross.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Default.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\DiagonalLeft.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\DiagonalRight.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Horizontal.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Move.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Text.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Skins\Default\Cursors\Vertical.cur">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <ToolkitTexture Include="Content\Skins\Default\Images\Button.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\CheckBox.Checked.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\CheckBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ComboBox.Button.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ComboBox.ListBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ComboBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ContextMenu.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ContextMenu.Selection.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Control.Outline.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Control.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\GroupBox.Flat.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\GroupBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\GroupPanel.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Icon.Error.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Icon.Information.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Icon.Question.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Icon.Warning.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ListBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ListBox.Selection.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\MainMenu.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\MainMenu.Selection.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ProgressBar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ProgressBar.Scale.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\RadioButton.Checked.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\RadioButton.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.ButtonHorz.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.ButtonVert.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.GlyphHorz.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.GlyphVert.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.RailHorz.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ScrollBar.RailVert.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.ArrowDown.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.ArrowLeft.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.ArrowRight.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.ArrowUp.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.End.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.Glyph.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.Home.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.PageDown.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Shared.PageUp.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Sidebar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\SidebarPanel.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\SpinBox.Button.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\SpinBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\StatusBar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TabControl.Header.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TabControl.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TextBox.Cursor.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TextBox.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ToolBar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ToolBarButton.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ToolBarPanel.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\ToolTip.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TrackBar.Button.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\TrackBar.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.Caption.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.CloseButton.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.FrameBottom.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.FrameLeft.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.FrameRight.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.FrameTop.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.Icon.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.png" />
+    <ToolkitTexture Include="Content\Skins\Default\Images\Window.Shadow.png" />
+    <Content Include="Content\Skins\Default\Skin.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Documents\ArchiveManager.xml" />
     <Content Include="Documents\Button.xml" />
     <Content Include="Documents\ButtonBase.xml" />
@@ -221,12 +330,6 @@
     <Content Include="Resources\Neoforce.ico">
       <Name>Neoforce</Name>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <NestedContentProject Include="Content\Content.contentproj">
-      <Project>{35afc410-c882-4ef4-8ce0-c53c2c712b0c}</Project>
-      <Visible>False</Visible>
-    </NestedContentProject>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -271,11 +374,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Content\ControlsContent.contentproj">
-      <Project>{35AFC410-C882-4EF4-8CE0-C53C2C712B0C}</Project>
-      <Name>ControlsContent %28Content%29</Name>
-      <XnaReferenceType>Content</XnaReferenceType>
-    </ProjectReference>
+    <ToolkitFont Include="Content\Skins\Default\Fonts\Default.spritefont">
+      <SubType>Designer</SubType>
+    </ToolkitFont>
+    <None Include="packages.config" />
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -284,18 +386,27 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <PostBuildEvent>"..\..\..\..\..\tools\buildmarker\BuildMarker.exe" ..\..\..\properties\AssemblyInfo.cs /i</PostBuildEvent>
-  </PropertyGroup>
+  </PropertyGroup>-->
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
+  <!--<Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />-->
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties Reset="0" AssemblyVersion="1" AssemblyFileVersion="0" StartDate="20080911" />
+      <UserProperties StartDate="20080911" AssemblyFileVersion="0" AssemblyVersion="1" Reset="0" />
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\SharpDX.2.6.2\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.2\build\SharpDX.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\SharpDX.2.6.2\build\SharpDX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SharpDX.2.6.2\build\SharpDX.targets'))" />
+    <Error Condition="!Exists('..\packages\SharpDX.Toolkit.2.6.2\build\SharpDX.Toolkit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SharpDX.Toolkit.2.6.2\build\SharpDX.Toolkit.targets'))" />
+  </Target>
+  <Import Project="..\packages\SharpDX.Toolkit.2.6.2\build\SharpDX.Toolkit.targets" Condition="Exists('..\packages\SharpDX.Toolkit.2.6.2\build\SharpDX.Toolkit.targets')" />
 </Project>

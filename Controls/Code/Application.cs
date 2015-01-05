@@ -21,13 +21,14 @@
 #region //// Using /////////////
 
 ////////////////////////////////////////////////////////////////////////////
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
 using TomShane.Neoforce.Controls;
 using System;
 
 #if (!XBOX && !XBOX_FAKE)
 using System.Windows.Forms;
+using SharpDX;
 #endif
 ////////////////////////////////////////////////////////////////////////////
 
@@ -168,11 +169,11 @@ namespace TomShane.Neoforce.Controls
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1024;
             graphics.PreferredBackBufferHeight = 768;
-            graphics.PreferredBackBufferFormat = SurfaceFormat.Color;
+            graphics.PreferredBackBufferFormat = PixelFormat.R8G8B8A8.UNorm;
             graphics.IsFullScreen = false;
             graphics.PreferMultiSampling = false;
             graphics.SynchronizeWithVerticalRetrace = false;
-            graphics.DeviceReset += new EventHandler<System.EventArgs>(Graphics_DeviceReset);
+            graphics.DeviceChangeEnd += new EventHandler<System.EventArgs>(Graphics_DeviceReset);
 
             IsFixedTimeStep = false;
             IsMouseVisible = true;
@@ -181,6 +182,8 @@ namespace TomShane.Neoforce.Controls
             manager.AutoCreateRenderTarget = false;
             manager.TargetFrames = 60;
             manager.WindowClosing += new WindowClosingEventHandler(Manager_WindowClosing);
+
+            Content.RootDirectory = "Content2";
         }
         ////////////////////////////////////////////////////////////////////////////                      
 
@@ -217,8 +220,8 @@ namespace TomShane.Neoforce.Controls
             sprite = new SpriteBatch(GraphicsDevice);
 
 #if (!XBOX && !XBOX_FAKE)
-            Manager.Window.BackColor = System.Drawing.Color.Black;
-            Manager.Window.FormBorderStyle = systemBorder ? System.Windows.Forms.FormBorderStyle.FixedDialog : System.Windows.Forms.FormBorderStyle.None;
+            //Manager.Window.BackColor = System.Drawing.Color.Black;
+            //Manager.Window.FormBorderStyle = systemBorder ? System.Windows.Forms.FormBorderStyle.FixedDialog : System.Windows.Forms.FormBorderStyle.None;
 
             Manager.Input.MouseMove += new MouseEventHandler(Input_MouseMove);
             Manager.Input.MouseDown += new MouseEventHandler(Input_MouseDown);
@@ -370,8 +373,8 @@ namespace TomShane.Neoforce.Controls
             if (Manager.RenderTarget != null)
             {
                 //These steps are already done by the manager on Graphics Device Reset.
-                //Manager.RenderTarget.Dispose();
-                //Manager.RenderTarget = CreateRenderTarget(); 
+                Manager.RenderTarget.Dispose();
+                Manager.RenderTarget = CreateRenderTarget(); 
                 Manager.Input.InputOffset = new InputOffset(0, 0, Manager.ScreenWidth / (float)Manager.TargetWidth, Manager.ScreenHeight / (float)Manager.TargetHeight);
             }
 
@@ -398,22 +401,22 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////
 
         ////////////////////////////////////////////////////////////////////////////	  
-        public new void Run()
-        {
-            // try
-            {
-                base.Run();
-            }
-            /* catch (Exception x)
-             {
-              #if (!XBOX && !XBOX_FAKE)         
-                MessageBox.Show("An unhandled exception has occurred.\n" + x.Message, Window.Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Manager.LogException(x);
-              #else
-                throw x;
-              #endif 
-             }*/
-        }
+        //public new void Run()
+        //{
+        //    // try
+        //    {
+        //        base.Run();
+        //    }
+        //    /* catch (Exception x)
+        //     {
+        //      #if (!XBOX && !XBOX_FAKE)         
+        //        MessageBox.Show("An unhandled exception has occurred.\n" + x.Message, Window.Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        Manager.LogException(x);
+        //      #else
+        //        throw x;
+        //      #endif 
+        //     }*/
+        //}
         ////////////////////////////////////////////////////////////////////////////	  
 
         #endregion
@@ -425,11 +428,11 @@ namespace TomShane.Neoforce.Controls
         ////////////////////////////////////////////////////////////////////////////	
         private void Input_MouseMove(object sender, MouseEventArgs e)
         {
-            if (mouseDown)
-            {
-                Manager.Window.Left = e.Position.X + Manager.Window.Left - mousePos.X;
-                Manager.Window.Top = e.Position.Y + Manager.Window.Top - mousePos.Y;
-            }
+            //if (mouseDown)
+            //{
+            //    Manager.Window.Left = e.Position.X + Manager.Window.Left - mousePos.X;
+            //    Manager.Window.Top = e.Position.Y + Manager.Window.Top - mousePos.Y;
+            //}
         }
         ////////////////////////////////////////////////////////////////////////////	
 

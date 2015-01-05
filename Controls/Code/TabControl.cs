@@ -23,8 +23,9 @@
 ////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
+using SharpDX;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -312,7 +313,7 @@ namespace TomShane.Neoforce.Controls
       
       if (tabPages.Count > 1)
       {
-        Point p = new Point(e.State.X - Root.AbsoluteLeft, e.State.Y - Root.AbsoluteTop);
+          Point p = new Point((int)e.State.X - Root.AbsoluteLeft, (int)e.State.Y - Root.AbsoluteTop);
         for (int i = 0; i < tabPages.Count; i++)
         {
           Rectangle r = tabPages[i].HeaderRect;
@@ -333,7 +334,7 @@ namespace TomShane.Neoforce.Controls
       if (tabPages.Count > 1)
       {
         int index = hoveredIndex;
-        Point p = new Point(e.State.X - Root.AbsoluteLeft, e.State.Y - Root.AbsoluteTop);
+        Point p = new Point((int)e.State.X - Root.AbsoluteLeft, (int)e.State.Y - Root.AbsoluteTop);
         for (int i = 0; i < tabPages.Count; i++)
         {
           Rectangle r = tabPages[i].HeaderRect;

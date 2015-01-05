@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NeoForce.SharpDX</id>
+    <version>0.0.2</version>
+    <authors>PlehXP</authors>
+    <owners>PlehXP</owners>
+    <licenseUrl>https://neoforce.codeplex.com/</licenseUrl>
+    <projectUrl>https://neoforce.codeplex.com/</projectUrl>
+    <iconUrl>https://neoforce.codeplex.com/</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      SharpDX port of NeoForce Controls
+      http://sharpdx.org/
+      https://neoforce.codeplex.com/
+      https://github.com/PlehXP/NeoforceControls-SharpDX
+    </description>
+    <releaseNotes>Initial port to SharpDX</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>SharpDX NeoForce</tags>
+    <dependencies>
+
+    </dependencies>
+  </metadata>
+</package>

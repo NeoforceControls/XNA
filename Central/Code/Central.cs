@@ -23,14 +23,14 @@
 ////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using SharpDX.Toolkit;
+//using SharpDX.Toolkit.Audio;
+using SharpDX.Toolkit.Content;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit.Input;
 using TomShane.Neoforce.Controls;
 using System.Runtime.InteropServices;
-using Microsoft.Xna.Framework.GamerServices;
+//using SharpDX.Toolkit.GamerServices;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -58,7 +58,7 @@ namespace TomShane.Neoforce.Central
     public Central(): base(true)
     {                                   
                
-      SystemBorder = false;
+      SystemBorder = true;
       FullScreenBorder = false;
       ClearBackground = false;              
       ExitConfirmation = false;      

@@ -25,11 +25,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit;
 
 #if (!XBOX && !XBOX_FAKE)
   using System.Windows.Forms;
+using SharpDX;
+using System.Reflection;
 #endif
 ////////////////////////////////////////////////////////////////////////////
 
@@ -524,7 +526,8 @@ namespace TomShane.Neoforce.Controls
     private SkinList<SkinCursor> cursors = null;  
     private SkinList<SkinImage> images = null;
     private SkinList<SkinAttribute> attributes = null;
-    private ArchiveManager content = null;    
+    //private ArchiveManager content = null;
+    private SharpDX.Toolkit.Content.ContentManager content = null;    
     ////////////////////////////////////////////////////////////////////////////
     
     #endregion
@@ -550,8 +553,12 @@ namespace TomShane.Neoforce.Controls
     public Skin(Manager manager, string name): base(manager)
     {
       this.name = name;
-      content = new ArchiveManager(Manager.Game.Services, GetArchiveLocation(name + Manager.SkinExtension));      
-      content.RootDirectory = GetFolder();
+      content = new SharpDX.Toolkit.Content.ContentManager(Manager.Game.Services); // new ArchiveManager(Manager.Game.Services, GetArchiveLocation(name + Manager.SkinExtension));
+      content.RootDirectory = "Content2"; // GetFolder();
+
+
+      content.Resolvers.Add(new SharpDX.Toolkit.Content.FileSystemContentResolver(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)));
+
       doc = new SkinXmlDocument();      
       controls = new SkinList<SkinControl>(); 
       fonts = new SkinList<SkinFont>();
@@ -559,29 +566,29 @@ namespace TomShane.Neoforce.Controls
       cursors = new SkinList<SkinCursor>();   
       attributes = new SkinList<SkinAttribute>();         
 
-      LoadSkin(null, content.UseArchive);       
+      LoadSkin(null, false); //content.UseArchive);       
 
       string folder = GetAddonsFolder();
       if (folder == "")
       {
-        content.UseArchive = true;
+        //content.UseArchive = true;
         folder = "Addons\\";
       }    
       else
       {
-        content.UseArchive = false;
-      }        
-      
-      string[] addons = content.GetDirectories(folder);
+        //content.UseArchive = false;
+      }
+
+      string[] addons = null; // content.GetDirectories(folder);
       
       if (addons != null && addons.Length > 0)
       {
         for (int i = 0; i < addons.Length; i++)
         {
           DirectoryInfo d = new DirectoryInfo(GetAddonsFolder() + addons[i]);
-          if (!((d.Attributes & FileAttributes.Hidden) == FileAttributes.Hidden) || content.UseArchive)
+          if (!((d.Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)) // || content.UseArchive)
           {          
-            LoadSkin(addons[i].Replace("\\", ""), content.UseArchive);          
+            LoadSkin(addons[i].Replace("\\", ""), false); //content.UseArchive);          
           }
         }  
       }           
@@ -631,7 +638,7 @@ namespace TomShane.Neoforce.Controls
     private string GetFolder()
     {
       string path = Path.GetFullPath(Manager.SkinDirectory) + name + "\\";
-      if (!Directory.Exists(path) || !File.Exists(path + "Skin.xnb"))
+      if (!Directory.Exists(path) || !File.Exists(path + "Skin.xml"))
       {
         path = "";
       }
@@ -675,7 +682,10 @@ namespace TomShane.Neoforce.Controls
       return ret;
     }    
     ////////////////////////////////////////////////////////////////////////////     
-    
+    public class CursorFile
+    {
+        public byte[] Data = null;
+    }
     ////////////////////////////////////////////////////////////////////////////
     public override void Init()
     {
@@ -683,27 +693,29 @@ namespace TomShane.Neoforce.Controls
 
       for (int i = 0; i < fonts.Count; i++)
       {
-        content.UseArchive = fonts[i].Archive;        
+        //content.UseArchive = fonts[i].Archive;        
         string asset = GetAsset("Fonts", fonts[i].Asset, fonts[i].Addon);
-        asset = content.UseArchive ? asset : Path.GetFullPath(asset);
+        //asset = Path.GetFullPath(asset);
         (fonts[i].Resource) = content.Load<SpriteFont>(asset);                                                            
       }
       
       #if (!XBOX && !XBOX_FAKE)
         for (int i = 0; i < cursors.Count; i++)
         {
-          content.UseArchive = cursors[i].Archive;
+          //content.UseArchive = cursors[i].Archive;
           string asset = GetAsset("Cursors", cursors[i].Asset, cursors[i].Addon);
-          asset = content.UseArchive ? asset : Path.GetFullPath(asset);     
-          cursors[i].Resource = content.Load<Cursor>(asset);        
+          asset = Path.GetFullPath(asset);     
+          //cursors[i].Resource = content.Load<Cursor>(asset);
+
+          cursors[i].Resource = Cursor.Current; // new Cursor(content.RootDirectory + "\\" + asset + ".cur");
         }
       #endif  
       
       for (int i = 0; i < images.Count; i++)
       {
-        content.UseArchive = images[i].Archive;
+        //content.UseArchive = images[i].Archive;
         string asset = GetAsset("Images", images[i].Asset, images[i].Addon);
-        asset = content.UseArchive ? asset : Path.GetFullPath(asset);        
+        //asset = Path.GetFullPath(asset);        
         images[i].Resource = content.Load<Texture2D>(asset);
       }
 
@@ -845,11 +857,13 @@ namespace TomShane.Neoforce.Controls
         {
           file = GetAddonsFolder() + addon + "\\";
         }        
-        file += "Skin";
+        file += "Skin.xml";
         
         file = archive ? file : Path.GetFullPath(file);       
-        doc = content.Load<SkinXmlDocument>(file);        
-        
+
+        doc = new SkinXmlDocument();
+        doc.Load(file);
+
         XmlElement e = doc["Skin"];        
         if (e != null)
         {                   

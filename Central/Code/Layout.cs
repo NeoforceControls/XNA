@@ -22,8 +22,8 @@
 
 ////////////////////////////////////////////////////////////////////////////
 using TomShane.Neoforce.Controls;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -340,9 +340,9 @@ namespace TomShane.Neoforce.Central
       con2.Height = con1.Height = tbc.TabPages[0].ClientHeight;
       con2.Anchor = con1.Anchor = Anchors.All;                
 
-      con1.Channels.Add(new ConsoleChannel(0, "General", Color.Orange));
-      con1.Channels.Add(new ConsoleChannel(1, "Private", Color.White));
-      con1.Channels.Add(new ConsoleChannel(2, "System", Color.Yellow));           
+      con1.Channels.Add(new ConsoleChannel(0, "General", SharpDX.Color.Orange));
+      con1.Channels.Add(new ConsoleChannel(1, "Private", SharpDX.Color.White));
+      con1.Channels.Add(new ConsoleChannel(2, "System", SharpDX.Color.Yellow));           
       
       // We want to share channels and message buffer in both consoles
       con2.Channels = con1.Channels;

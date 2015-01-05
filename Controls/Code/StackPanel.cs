@@ -21,10 +21,11 @@
 #region //// Using /////////////
 
 ////////////////////////////////////////////////////////////////////////////
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit.Graphics;
 using System;
+using SharpDX;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion

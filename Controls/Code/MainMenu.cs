@@ -23,9 +23,10 @@
 ////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit.Input;
+using SharpDX;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -179,9 +180,9 @@ namespace TomShane.Neoforce.Controls
     protected override void OnMouseMove(MouseEventArgs e)
     {
       base.OnMouseMove(e);
-      int i = lastIndex;      
-                  
-      TrackItem(e.State.X - Root.AbsoluteLeft, e.State.Y - Root.AbsoluteTop);
+      int i = lastIndex;
+
+      TrackItem((int)e.State.X - Root.AbsoluteLeft, (int)e.State.Y - Root.AbsoluteTop);
 
       if (ItemIndex >= 0 && (i == -1 || i != ItemIndex) && Items[ItemIndex].Items != null && Items[ItemIndex].Items.Count > 0 && ChildMenu != null)
       {                               

@@ -20,10 +20,11 @@
 
 #region //// Using /////////////
 
+using SharpDX;
 ////////////////////////////////////////////////////////////////////////////
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit.Input;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -268,7 +269,7 @@ namespace TomShane.Neoforce.Controls
         SkinControl c = Manager.Skin.Controls[skShadow];
         SkinLayer l = c.Layers[lrShadow];
 
-        Color cl = Color.FromNonPremultiplied(l.States.Enabled.Color.R, l.States.Enabled.Color.G, l.States.Enabled.Color.B, Alpha);
+        Color cl = new Color(l.States.Enabled.Color.R, l.States.Enabled.Color.G, l.States.Enabled.Color.B, Alpha);
 
         renderer.Begin(BlendingMode.Default);
         renderer.DrawLayer(l, new Rectangle(Left - c.OriginMargins.Left, Top - c.OriginMargins.Top, Width + c.OriginMargins.Horizontal, Height + c.OriginMargins.Vertical), cl, 0);

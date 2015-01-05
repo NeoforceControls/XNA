@@ -25,11 +25,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TomShane.Neoforce.Controls;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit;
 using System.Threading;
 using Controls = TomShane.Neoforce.Controls;
 using System.IO;
+using SharpDX;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -280,7 +281,7 @@ namespace TomShane.Neoforce.Central
       btnDisable.Top = 8;
       btnDisable.Text = "Disable";      
       btnDisable.Click += new Controls.EventHandler(btnDisable_Click);
-      btnDisable.TextColor = Color.FromNonPremultiplied(255, 64, 32, 200);                     
+      btnDisable.TextColor = new Color(255, 64, 32, 200);                     
 
       btnProgress = new Button(manager);
       btnProgress.Init();
@@ -404,12 +405,12 @@ namespace TomShane.Neoforce.Central
       if (txtEdit.Enabled)
       {       
         btnDisable.Text = "Enable";
-        btnDisable.TextColor = Color.FromNonPremultiplied(64, 255, 32, 200);
+        btnDisable.TextColor = new Color(64, 255, 32, 200);
         }  
       else
       {  
        btnDisable.Text = "Disable";
-       btnDisable.TextColor = Color.FromNonPremultiplied(255, 64, 32, 200);             
+       btnDisable.TextColor = new Color(255, 64, 32, 200);             
       }      
        ClientArea.Enabled = !ClientArea.Enabled;
       

@@ -23,9 +23,10 @@
 ////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.GamerServices;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Input;
+using SharpDX;
+
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -220,7 +221,7 @@ namespace TomShane.Neoforce.Controls
 
     ////////////////////////////////////////////////////////////////////////////
     #if (!XBOX && !XBOX_FAKE)
-      private System.Windows.Forms.Form window = null;
+      private GameWindow window = null;
     #endif
     
     private List<InputKey> keys = new List<InputKey>();
@@ -400,16 +401,16 @@ namespace TomShane.Neoforce.Controls
     ////////////////////////////////////////////////////////////////////////////
     public virtual void Update(GameTime gameTime)
     {
-      if (manager.UseGuide && Guide.IsVisible) return;
+      //if (manager.UseGuide && Guide.IsVisible) return;
       
       #if (!XBOX && !XBOX_FAKE)
-        MouseState ms = Mouse.GetState();
-        KeyboardState ks = Keyboard.GetState(PlayerIndex.One);      
+        MouseState ms = this.manager.MouseManager.GetState();
+        KeyboardState ks = this.manager.KeyboardManager.GetState();      
       #endif  
             
           
       #if (!XBOX && !XBOX_FAKE)
-      if (window.Focused)      
+      //if (window.Focused)      
       #endif
       {
         #if (!XBOX && !XBOX_FAKE)
@@ -417,21 +418,21 @@ namespace TomShane.Neoforce.Controls
           if ((inputMethods & InputMethods.Keyboard) == InputMethods.Keyboard) UpdateKeys(ks, gameTime);                    
         #endif  
 
-        if ((inputMethods & InputMethods.GamePad) == InputMethods.GamePad)
-        {
-          PlayerIndex index = PlayerIndex.One;
-          if (Gamer.SignedInGamers.Count > 0 && activePlayer == ActivePlayer.None)
-          {
-            int i = 0; // Have to be done this way, else it crashes for player other than one
-            index = Gamer.SignedInGamers[i].PlayerIndex;
-          }                      
-          else if (activePlayer != ActivePlayer.None)
-          {
-            index = (PlayerIndex)activePlayer;
-          }        
-          GamePadState gs = GamePad.GetState(index);            
-          UpdateGamePad(index, gs, gameTime);
-        }  
+        //if ((inputMethods & InputMethods.GamePad) == InputMethods.GamePad)
+        //{
+        //  PlayerIndex index = PlayerIndex.One;
+        //  if (Gamer.SignedInGamers.Count > 0 && activePlayer == ActivePlayer.None)
+        //  {
+        //    int i = 0; // Have to be done this way, else it crashes for player other than one
+        //    index = Gamer.SignedInGamers[i].PlayerIndex;
+        //  }                      
+        //  else if (activePlayer != ActivePlayer.None)
+        //  {
+        //    index = (PlayerIndex)activePlayer;
+        //  }        
+        //  GamePadState gs = GamePad.GetState(index);            
+        //  UpdateGamePad(index, gs, gameTime);
+        //}  
       }  
     }
     ////////////////////////////////////////////////////////////////////////////
@@ -439,29 +440,31 @@ namespace TomShane.Neoforce.Controls
     ////////////////////////////////////////////////////////////////////////////
     private ButtonState GetVectorState(GamePadButton button, GamePadState state)
     {
-      ButtonState ret = ButtonState.Released;
-      bool down = false;
-      float t = ClickThreshold;
+      //ButtonState ret = ButtonState.Released;
+      //bool down = false;
+      //float t = ClickThreshold;
       
-      switch (button)
-      {
-        case GamePadButton.LeftStickLeft: down = state.ThumbSticks.Left.X < -t; break;
-        case GamePadButton.LeftStickRight: down = state.ThumbSticks.Left.X > t; break;
-        case GamePadButton.LeftStickUp: down = state.ThumbSticks.Left.Y > t; break;
-        case GamePadButton.LeftStickDown: down = state.ThumbSticks.Left.Y < -t; break;
+      //switch (button)
+      //{
+      //  case GamePadButton.LeftStickLeft: down = state.ThumbSticks.Left.X < -t; break;
+      //  case GamePadButton.LeftStickRight: down = state.ThumbSticks.Left.X > t; break;
+      //  case GamePadButton.LeftStickUp: down = state.ThumbSticks.Left.Y > t; break;
+      //  case GamePadButton.LeftStickDown: down = state.ThumbSticks.Left.Y < -t; break;
 
-        case GamePadButton.RightStickLeft: down = state.ThumbSticks.Right.X < -t; break;
-        case GamePadButton.RightStickRight: down = state.ThumbSticks.Right.X > t; break;
-        case GamePadButton.RightStickUp: down = state.ThumbSticks.Right.Y > t; break;
-        case GamePadButton.RightStickDown: down = state.ThumbSticks.Right.Y < -t; break;      
+      //  case GamePadButton.RightStickLeft: down = state.ThumbSticks.Right.X < -t; break;
+      //  case GamePadButton.RightStickRight: down = state.ThumbSticks.Right.X > t; break;
+      //  case GamePadButton.RightStickUp: down = state.ThumbSticks.Right.Y > t; break;
+      //  case GamePadButton.RightStickDown: down = state.ThumbSticks.Right.Y < -t; break;      
         
-        case GamePadButton.LeftTrigger: down = state.Triggers.Left > t; break;
-        case GamePadButton.RightTrigger: down = state.Triggers.Right > t; break;
-      }
+      //  case GamePadButton.LeftTrigger: down = state.Triggers.Left > t; break;
+      //  case GamePadButton.RightTrigger: down = state.Triggers.Right > t; break;
+      //}
       
-      ret = down ? ButtonState.Pressed : ButtonState.Released;
+      //ret = down ? ButtonState.Pressed : ButtonState.Released;
             
-      return ret;
+      //return ret;
+
+        return new ButtonState();
     }
     ////////////////////////////////////////////////////////////////////////////
 
@@ -470,38 +473,38 @@ namespace TomShane.Neoforce.Controls
     {          
       GamePadEventArgs e = new GamePadEventArgs(playerIndex);      
       
-      if (state.ThumbSticks.Left != gamePadState.ThumbSticks.Left ||
-          state.ThumbSticks.Right != gamePadState.ThumbSticks.Right ||
-          state.Triggers.Left != gamePadState.Triggers.Left ||
-          state.Triggers.Right != gamePadState.Triggers.Right)
-      {
-        BuildGamePadEvent(state, GamePadButton.None, ref e);
-        if (GamePadMove != null) GamePadMove.Invoke(this, e);        
-      }           
+      //if (state.ThumbSticks.Left != gamePadState.ThumbSticks.Left ||
+      //    state.ThumbSticks.Right != gamePadState.ThumbSticks.Right ||
+      //    state.Triggers.Left != gamePadState.Triggers.Left ||
+      //    state.Triggers.Right != gamePadState.Triggers.Right)
+      //{
+      //  BuildGamePadEvent(state, GamePadButton.None, ref e);
+      //  if (GamePadMove != null) GamePadMove.Invoke(this, e);        
+      //}           
 
       foreach (InputGamePadButton btn in gamePadButtons)
       {
-        ButtonState bs = ButtonState.Released;
+          ButtonState bs; ;
 
         if (btn.Button == GamePadButton.None) continue;
-        else if (btn.Button == GamePadButton.A) bs = state.Buttons.A;
-        else if (btn.Button == GamePadButton.B) bs = state.Buttons.B;
-        else if (btn.Button == GamePadButton.Back) bs = state.Buttons.Back;
-        else if (btn.Button == GamePadButton.Down) bs = state.DPad.Down;
-        else if (btn.Button == GamePadButton.Left) bs = state.DPad.Left;
-        else if (btn.Button == GamePadButton.Right) bs = state.DPad.Right;
-        else if (btn.Button == GamePadButton.Start) bs = state.Buttons.Start;
-        else if (btn.Button == GamePadButton.Up) bs = state.DPad.Up;
-        else if (btn.Button == GamePadButton.X) bs = state.Buttons.X;
-        else if (btn.Button == GamePadButton.Y) bs = state.Buttons.Y;
-        else if (btn.Button == GamePadButton.BigButton) bs = state.Buttons.BigButton;
-        else if (btn.Button == GamePadButton.LeftShoulder) bs = state.Buttons.LeftShoulder;
-        else if (btn.Button == GamePadButton.RightShoulder) bs = state.Buttons.RightShoulder;
-        else if (btn.Button == GamePadButton.LeftStick) bs = state.Buttons.LeftStick;
-        else if (btn.Button == GamePadButton.RightStick) bs = state.Buttons.RightStick;                        
+        //else if (btn.Button == GamePadButton.A) bs = state.Buttons.A;
+        //else if (btn.Button == GamePadButton.B) bs = state.Buttons.B;
+        //else if (btn.Button == GamePadButton.Back) bs = state.Buttons.Back;
+        //else if (btn.Button == GamePadButton.Down) bs = state.DPad.Down;
+        //else if (btn.Button == GamePadButton.Left) bs = state.DPad.Left;
+        //else if (btn.Button == GamePadButton.Right) bs = state.DPad.Right;
+        //else if (btn.Button == GamePadButton.Start) bs = state.Buttons.Start;
+        //else if (btn.Button == GamePadButton.Up) bs = state.DPad.Up;
+        //else if (btn.Button == GamePadButton.X) bs = state.Buttons.X;
+        //else if (btn.Button == GamePadButton.Y) bs = state.Buttons.Y;
+        //else if (btn.Button == GamePadButton.BigButton) bs = state.Buttons.BigButton;
+        //else if (btn.Button == GamePadButton.LeftShoulder) bs = state.Buttons.LeftShoulder;
+        //else if (btn.Button == GamePadButton.RightShoulder) bs = state.Buttons.RightShoulder;
+        //else if (btn.Button == GamePadButton.LeftStick) bs = state.Buttons.LeftStick;
+        //else if (btn.Button == GamePadButton.RightStick) bs = state.Buttons.RightStick;                        
         else bs = GetVectorState(btn.Button, state);
         
-        bool pressed = (bs == ButtonState.Pressed);
+        bool pressed = bs.Pressed;
         if (pressed)
         {
           double ms = gameTime.ElapsedGameTime.TotalMilliseconds;          
@@ -542,10 +545,10 @@ namespace TomShane.Neoforce.Controls
     {      
       e.State = state;
       e.Button = button;   
-      e.Vectors.LeftStick = new Vector2(state.ThumbSticks.Left.X, state.ThumbSticks.Left.Y);
-      e.Vectors.RightStick = new Vector2(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
-      e.Vectors.LeftTrigger = state.Triggers.Left;
-      e.Vectors.RightTrigger = state.Triggers.Right;
+      //e.Vectors.LeftStick = new Vector2(state.ThumbSticks.Left.X, state.ThumbSticks.Left.Y);
+      //e.Vectors.RightStick = new Vector2(state.ThumbSticks.Right.X, state.ThumbSticks.Right.Y);
+      //e.Vectors.LeftTrigger = state.Triggers.Left;
+      //e.Vectors.RightTrigger = state.Triggers.Right;
     }
     ////////////////////////////////////////////////////////////////////////////    
     
@@ -556,9 +559,11 @@ namespace TomShane.Neoforce.Controls
       
       KeyEventArgs e = new KeyEventArgs();
       
-      e.Caps = (((ushort)NativeMethods.GetKeyState(0x14)) & 0xffff) != 0;      
-      
-      foreach (Keys key in state.GetPressedKeys())
+      e.Caps = (((ushort)NativeMethods.GetKeyState(0x14)) & 0xffff) != 0;
+
+      List<Keys> downKeys = new List<Keys>();
+      state.GetDownKeys(downKeys);
+      foreach (Keys key in downKeys)
       {
         if (key == Keys.LeftAlt || key == Keys.RightAlt) e.Alt = true;
         else if (key == Keys.LeftShift || key == Keys.RightShift) e.Shift = true;
@@ -632,13 +637,13 @@ namespace TomShane.Neoforce.Controls
       e.State = state;      
       e.Button = button;
 
-      e.Position = new Point(state.X, state.Y);                        
+      e.Position = new Point((int)(mouseState.X * manager.ScreenWidth), (int)(mouseState.Y * manager.ScreenHeight));                        
       AdjustPosition(ref e);
 
-      e.Position = RecalcPosition(e.Position);      
-      e.State = new MouseState(e.Position.X, e.Position.Y, e.State.ScrollWheelValue, e.State.LeftButton, e.State.MiddleButton, e.State.RightButton, e.State.XButton1, e.State.XButton2);      
+      e.Position = RecalcPosition(e.Position);
+      e.State = new MouseState(e.State.LeftButton, e.State.MiddleButton, e.State.RightButton, e.State.XButton1, e.State.XButton2, e.Position.X, e.Position.Y, e.State.WheelDelta);      
       
-      Point pos = RecalcPosition(new Point(mouseState.X, mouseState.Y));                              
+      Point pos = RecalcPosition(new Point((int)(mouseState.X * manager.ScreenWidth), (int)(mouseState.Y * manager.ScreenHeight)));                              
       e.Difference = new Point(e.Position.X - pos.X, e.Position.Y - pos.Y);                              
     }
     ////////////////////////////////////////////////////////////////////////////    
@@ -659,12 +664,12 @@ namespace TomShane.Neoforce.Controls
       {
         MouseEventArgs e = new MouseEventArgs();          
         
-        MouseButton btn = MouseButton.None;       
-        if (state.LeftButton == ButtonState.Pressed) btn = MouseButton.Left;
-        else if (state.RightButton == ButtonState.Pressed) btn = MouseButton.Right;
-        else if (state.MiddleButton == ButtonState.Pressed) btn = MouseButton.Middle;
-        else if (state.XButton1 == ButtonState.Pressed) btn = MouseButton.XButton1;
-        else if (state.XButton2 == ButtonState.Pressed) btn = MouseButton.XButton2;
+        MouseButton btn = MouseButton.None;
+        if (state.LeftButton.Down) btn = MouseButton.Left;
+        else if (state.RightButton.Down) btn = MouseButton.Right;
+        else if (state.MiddleButton.Down) btn = MouseButton.Middle;
+        else if (state.XButton1.Down) btn = MouseButton.XButton1;
+        else if (state.XButton2.Down) btn = MouseButton.XButton2;
         
         BuildMouseEvent(state, btn, ref e);
         if (MouseMove != null) 
@@ -674,10 +679,10 @@ namespace TomShane.Neoforce.Controls
       }
 
       // Mouse wheel position changed
-      if (state.ScrollWheelValue != mouseState.ScrollWheelValue)
+      if (state.WheelDelta != mouseState.WheelDelta)
       {
           MouseEventArgs e = new MouseEventArgs();
-          MouseScrollDirection direction = state.ScrollWheelValue < mouseState.ScrollWheelValue ? MouseScrollDirection.Down : MouseScrollDirection.Up;
+          MouseScrollDirection direction = state.WheelDelta < mouseState.WheelDelta ? MouseScrollDirection.Down : MouseScrollDirection.Up;
 
           BuildMouseEvent(state, MouseButton.None, direction, ref e);
 
@@ -704,7 +709,7 @@ namespace TomShane.Neoforce.Controls
 
       foreach (InputMouseButton btn in mouseButtons)
       {      
-        ButtonState bs = ButtonState.Released;
+        ButtonState bs; // = ButtonState.Released;
         
         if (btn.Button == MouseButton.Left) bs = state.LeftButton;
         else if (btn.Button == MouseButton.Right) bs = state.RightButton;
@@ -713,7 +718,7 @@ namespace TomShane.Neoforce.Controls
         else if (btn.Button == MouseButton.XButton2) bs = state.XButton2;
         else continue;
       
-        bool pressed = (bs == ButtonState.Pressed);                
+        bool pressed = (bs.Down);                
         if (pressed)
         {
           double ms = gameTime.ElapsedGameTime.TotalMilliseconds;          

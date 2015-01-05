@@ -22,11 +22,11 @@
 
 ////////////////////////////////////////////////////////////////////////////
 using System;
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit;
 using System.Xml;
 using System.Reflection;
 using System.IO;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit.Graphics;
 ////////////////////////////////////////////////////////////////////////////
 
 #endregion
@@ -74,7 +74,7 @@ namespace TomShane.Neoforce.Controls
         
         #if (!XBOX && !XBOX_FAKE)
         
-        string file = content.RootDirectory + asset;
+        string file = content.RootDirectory + asset + ".xml";
         
         if (File.Exists(file))
         {

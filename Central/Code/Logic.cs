@@ -25,8 +25,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TomShane.Neoforce.Controls;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using SharpDX.Toolkit.Graphics;
+using SharpDX.Toolkit;
 using System.Threading;
 using Controls = TomShane.Neoforce.Controls;
 ////////////////////////////////////////////////////////////////////////////
@@ -66,10 +66,13 @@ namespace TomShane.Neoforce.Central
       {
         if (list[i] is Window)
         {
-          if (((Window)list[i]).Text.Substring(0, 6) == "Window")
-          {
-            (list[i] as Window).Dispose();            
-          }
+            if (!string.IsNullOrEmpty(((Window)list[i]).Text)) 
+            {
+              if (((Window)list[i]).Text.Substring(0, 6) == "Window")
+              {
+                (list[i] as Window).Dispose();            
+              }
+            }
         }
       }
       list.Clear();

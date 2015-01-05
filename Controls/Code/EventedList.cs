@@ -22,8 +22,8 @@
 
 ////////////////////////////////////////////////////////////////////////////
 using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
 using System.Collections;
 using System.Collections.Generic;
 ////////////////////////////////////////////////////////////////////////////

@@ -24,16 +24,18 @@
 ////////////////////////////////////////////////////////////////////////////
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit;
+using SharpDX.Toolkit.Graphics;
 using System.Reflection;
-using Microsoft.Xna.Framework.Input;
+using SharpDX.Toolkit.Input;
 
 #if (!XBOX && !XBOX_FAKE)
   using System.Windows.Forms;
   using System.IO;
   using System.Text;
   using System.Media;
+using SharpDX;
+using SharpDX.Direct2D1;
 #endif
 ////////////////////////////////////////////////////////////////////////////
 
@@ -50,7 +52,7 @@ namespace TomShane.Neoforce.Controls
   /// <summary>
   /// Manages rendering of all controls.
   /// </summary>  
-  public class Manager: DrawableGameComponent
+    public class Manager : GameSystem
   {
     
     private struct ControlStates
@@ -73,16 +75,19 @@ namespace TomShane.Neoforce.Controls
     internal const int _ToolTipDelay = 500;
     internal const int _DoubleClickTime = 500;
     internal const int _TextureResizeIncrement = 32;
-    internal const RenderTargetUsage _RenderTargetUsage = RenderTargetUsage.DiscardContents;
+    internal const SharpDX.DXGI.Usage _RenderTargetUsage = SharpDX.DXGI.Usage.DiscardOnPresent; // RenderTargetUsage.DiscardContents;
     ////////////////////////////////////////////////////////////////////////////    
 
     #endregion
+
+    public MouseManager MouseManager;
+    public KeyboardManager KeyboardManager;
 
     #region //// Fields ////////////
 
     ////////////////////////////////////////////////////////////////////////////    
     #if (!XBOX && !XBOX_FAKE)
-      private Form window = null;
+      private GameWindow window = null;
       private Cursor cursor = null;
     #endif
     ////////////////////////////////////////////////////////////////////////////            
@@ -144,7 +149,7 @@ namespace TomShane.Neoforce.Controls
       /// <summary>
       /// Returns the <see cref="Form"/> the game runs in.
       /// </summary>
-      public virtual Form Window { get { return window; } }
+      public virtual GameWindow Window { get { return window; } }
       
       /// <summary>
       /// Gets or sets an application cursor.
@@ -452,7 +457,7 @@ namespace TomShane.Neoforce.Controls
       {
         if (GraphicsDevice != null)
         {
-          return GraphicsDevice.PresentationParameters.BackBufferWidth;
+          return GraphicsDevice.Presenter.Description.BackBufferWidth;
         }
         else return 0;
       }
@@ -470,7 +475,7 @@ namespace TomShane.Neoforce.Controls
       {
         if (GraphicsDevice != null)
         {
-          return GraphicsDevice.PresentationParameters.BackBufferHeight;
+            return GraphicsDevice.Presenter.Description.BackBufferHeight;
         }
         else return 0;
       }
@@ -620,7 +625,7 @@ namespace TomShane.Neoforce.Controls
     {
       disposing = false;
       
-      AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleUnhadledExceptions);
+      //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleUnhadledExceptions);
     
       #if (!XBOX && !XBOX_FAKE)
         menuDelay = SystemInformation.MenuShowDelay;
@@ -628,11 +633,18 @@ namespace TomShane.Neoforce.Controls
       #endif
 
       #if (!XBOX && !XBOX_FAKE)
-        window = (Form)Form.FromHandle(Game.Window.Handle);
-        window.FormClosing += new FormClosingEventHandler(Window_FormClosing);
+        window = Game.Window;
+        //window.FormClosing += new FormClosingEventHandler(Window_FormClosing);
       #endif
       
       content = new ArchiveManager(Game.Services);
+
+      content.RootDirectory = ""; // GetFolder();
+
+
+      content.Resolvers.Add(new SharpDX.Toolkit.Content.FileSystemContentResolver(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)));
+
+
       input = new InputSystem(this, new InputOffset(0, 0, 1f, 1f));
       components = new List<Component>();
       controls = new ControlsList();
@@ -667,7 +679,10 @@ namespace TomShane.Neoforce.Controls
       
       keyboardLayouts.Add(new KeyboardLayout());
       keyboardLayouts.Add(new CzechKeyboardLayout());
-      keyboardLayouts.Add(new GermanKeyboardLayout());                        
+      keyboardLayouts.Add(new GermanKeyboardLayout());   
+        
+        MouseManager = new MouseManager(game);
+        KeyboardManager = new KeyboardManager(game);     
     }
     ////////////////////////////////////////////////////////////////////////////                   
     
@@ -780,8 +795,8 @@ namespace TomShane.Neoforce.Controls
           input = null;
         }
       }
-      if (GraphicsDevice != null)
-          GraphicsDevice.DeviceReset -= new System.EventHandler<System.EventArgs>(GraphicsDevice_DeviceReset);
+      //if (GraphicsDevice != null)
+      //    GraphicsDevice.DeviceReset -= new System.EventHandler<System.EventArgs>(GraphicsDevice_DeviceReset);
       base.Dispose(disposing);
     }
     ////////////////////////////////////////////////////////////////////////////
@@ -794,7 +809,7 @@ namespace TomShane.Neoforce.Controls
     #if (!XBOX && !XBOX_FAKE)
       private void SetCursor(Cursor cursor)
       {                
-        window.Cursor = cursor;
+        //window.Cursor = cursor;
       }
     #endif
     ////////////////////////////////////////////////////////////////////////////
@@ -845,8 +860,8 @@ namespace TomShane.Neoforce.Controls
     /// Method used as an event handler for the GraphicsDeviceManager.PreparingDeviceSettings event.
     /// </summary>
     protected virtual void PrepareGraphicsDevice(object sender, PreparingDeviceSettingsEventArgs e)
-    {    
-      e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = _RenderTargetUsage;
+    {
+        //e.GraphicsDeviceInformation.PresentationParameters.RenderTargetUsage = _RenderTargetUsage;
       int w = e.GraphicsDeviceInformation.PresentationParameters.BackBufferWidth;
       int h = e.GraphicsDeviceInformation.PresentationParameters.BackBufferHeight;
                   
@@ -899,7 +914,7 @@ namespace TomShane.Neoforce.Controls
         renderTarget = CreateRenderTarget();        
       }
       
-      GraphicsDevice.DeviceReset += new System.EventHandler<System.EventArgs>(GraphicsDevice_DeviceReset);      
+      //GraphicsDevice.DeviceReset += new System.EventHandler<System.EventArgs>(GraphicsDevice_DeviceReset);      
       
       input.Initialize();      
       renderer = new Renderer(this);
@@ -923,7 +938,7 @@ namespace TomShane.Neoforce.Controls
     public virtual RenderTarget2D CreateRenderTarget(int width, int height)
     {
       Input.InputOffset = new InputOffset(0, 0, ScreenWidth / (float)width, ScreenHeight / (float)height);
-      return new RenderTarget2D(GraphicsDevice, width, height, false, SurfaceFormat.Color, DepthFormat.None, GraphicsDevice.PresentationParameters.MultiSampleCount, _RenderTargetUsage);      
+      return RenderTarget2D.New(GraphicsDevice, width, height, SharpDX.Toolkit.Graphics.PixelFormat.R8G8B8A8.UNorm);      
     }
     ////////////////////////////////////////////////////////////////////////////
 
@@ -1213,7 +1228,7 @@ namespace TomShane.Neoforce.Controls
               c.PrepareTexture(renderer, gameTime);
             }
                
-            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.SetRenderTargets(renderTarget);
             GraphicsDevice.Clear(Color.Transparent);         
           
             if (renderer != null)
@@ -1225,7 +1240,7 @@ namespace TomShane.Neoforce.Controls
             }
           }                             
         
-          GraphicsDevice.SetRenderTarget(null);
+          GraphicsDevice.SetRenderTargets();
         }  
       } 
       else
@@ -1281,13 +1296,13 @@ namespace TomShane.Neoforce.Controls
     ////////////////////////////////////////////////////////////////////////////
 
     ////////////////////////////////////////////////////////////////////////////     
-    private void HandleUnhadledExceptions(object sender, UnhandledExceptionEventArgs e)
-    {
-      if (LogUnhandledExceptions)
-      {
-        LogException(e.ExceptionObject as Exception);
-      }
-    }
+    //private void HandleUnhadledExceptions(object sender, UnhandledExceptionEventArgs e)
+    //{
+    //  if (LogUnhandledExceptions)
+    //  {
+    //    LogException(e.ExceptionObject as Exception);
+    //  }
+    //}
     ////////////////////////////////////////////////////////////////////////////     
     
     ////////////////////////////////////////////////////////////////////////////     
@@ -1461,7 +1476,7 @@ namespace TomShane.Neoforce.Controls
       {
         int index = -1;
 
-        if ((kbe.Key == Microsoft.Xna.Framework.Input.Keys.Left && !kbe.Handled) ||
+        if ((kbe.Key ==SharpDX.Toolkit.Input.Keys.Left && !kbe.Handled) ||
             (gpe.Button == c.GamePadActions.Left && !gpe.Handled))
         {
           int miny = int.MaxValue;
@@ -1482,7 +1497,7 @@ namespace TomShane.Neoforce.Controls
             }
           }
         }
-        else if ((kbe.Key == Microsoft.Xna.Framework.Input.Keys.Right && !kbe.Handled) ||
+        else if ((kbe.Key ==SharpDX.Toolkit.Input.Keys.Right && !kbe.Handled) ||
                  (gpe.Button == c.GamePadActions.Right && !gpe.Handled))
         {
           int miny = int.MaxValue;
@@ -1503,7 +1518,7 @@ namespace TomShane.Neoforce.Controls
             }
           }
         }
-        else if ((kbe.Key == Microsoft.Xna.Framework.Input.Keys.Up && !kbe.Handled) ||
+        else if ((kbe.Key ==SharpDX.Toolkit.Input.Keys.Up && !kbe.Handled) ||
                  (gpe.Button == c.GamePadActions.Up && !gpe.Handled))
         {
           int miny = int.MinValue;
@@ -1524,7 +1539,7 @@ namespace TomShane.Neoforce.Controls
             }
           }
         }
-        else if ((kbe.Key == Microsoft.Xna.Framework.Input.Keys.Down && !kbe.Handled) ||
+        else if ((kbe.Key ==SharpDX.Toolkit.Input.Keys.Down && !kbe.Handled) ||
                  (gpe.Button == c.GamePadActions.Down && !gpe.Handled))
         {
           int miny = int.MaxValue;
@@ -1808,7 +1823,7 @@ namespace TomShane.Neoforce.Controls
         states.Buttons[(int)MouseButton.None] = c;
         c.SendMessage(Message.KeyDown, e);
 
-        if (e.Key == Microsoft.Xna.Framework.Input.Keys.Enter)
+        if (e.Key ==SharpDX.Toolkit.Input.Keys.Enter)
         {
           c.SendMessage(Message.Click, new MouseEventArgs(new MouseState(), MouseButton.None, Point.Zero));
         }
@@ -1823,7 +1838,7 @@ namespace TomShane.Neoforce.Controls
 
       if (c != null)
       {
-        if (e.Key == Microsoft.Xna.Framework.Input.Keys.Space)
+        if (e.Key ==SharpDX.Toolkit.Input.Keys.Space)
         {
           c.SendMessage(Message.Click, new MouseEventArgs(new MouseState(), MouseButton.None, Point.Zero));
         }
@@ -1842,20 +1857,20 @@ namespace TomShane.Neoforce.Controls
       {
         c.SendMessage(Message.KeyPress, e);
 
-        if ((e.Key == Microsoft.Xna.Framework.Input.Keys.Right ||
-             e.Key == Microsoft.Xna.Framework.Input.Keys.Left ||
-             e.Key == Microsoft.Xna.Framework.Input.Keys.Up ||
-             e.Key == Microsoft.Xna.Framework.Input.Keys.Down) && !e.Handled && CheckButtons((int)MouseButton.None))
+        if ((e.Key ==SharpDX.Toolkit.Input.Keys.Right ||
+             e.Key ==SharpDX.Toolkit.Input.Keys.Left ||
+             e.Key ==SharpDX.Toolkit.Input.Keys.Up ||
+             e.Key ==SharpDX.Toolkit.Input.Keys.Down) && !e.Handled && CheckButtons((int)MouseButton.None))
         {
           ProcessArrows(c, e, new GamePadEventArgs(PlayerIndex.One));
           KeyDownProcess(sender, e);
         }
-        else if (e.Key == Microsoft.Xna.Framework.Input.Keys.Tab && !e.Shift && !e.Handled && CheckButtons((int)MouseButton.None))
+        else if (e.Key ==SharpDX.Toolkit.Input.Keys.Tab && !e.Shift && !e.Handled && CheckButtons((int)MouseButton.None))
         {
           TabNextControl(c);
           KeyDownProcess(sender, e);
         }
-        else if (e.Key == Microsoft.Xna.Framework.Input.Keys.Tab && e.Shift && !e.Handled && CheckButtons((int)MouseButton.None))
+        else if (e.Key ==SharpDX.Toolkit.Input.Keys.Tab && e.Shift && !e.Handled && CheckButtons((int)MouseButton.None))
         {
           TabPrevControl(c);
           KeyDownProcess(sender, e);

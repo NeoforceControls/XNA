@@ -20,9 +20,10 @@
 
 #region //// Using /////////////
 
-using Microsoft.Xna.Framework;
+using SharpDX;
+using SharpDX.Toolkit;
 ////////////////////////////////////////////////////////////////////////////
-using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Toolkit.Graphics;
 using System;
 ////////////////////////////////////////////////////////////////////////////
 
@@ -289,12 +290,12 @@ namespace TomShane.Neoforce.Controls
     ////////////////////////////////////////////////////////////////////////////
     void btnSlider_KeyPress(object sender, KeyEventArgs e)
     {
-      if (e.Key == Microsoft.Xna.Framework.Input.Keys.Left || e.Key == Microsoft.Xna.Framework.Input.Keys.Down) Value -= stepSize;
-      else if (e.Key == Microsoft.Xna.Framework.Input.Keys.Right || e.Key == Microsoft.Xna.Framework.Input.Keys.Up) Value += stepSize;
-      else if (e.Key == Microsoft.Xna.Framework.Input.Keys.PageDown) Value -= pageSize;
-      else if (e.Key == Microsoft.Xna.Framework.Input.Keys.PageUp) Value += pageSize;
-      else if (e.Key == Microsoft.Xna.Framework.Input.Keys.Home) Value = 0;
-      else if (e.Key == Microsoft.Xna.Framework.Input.Keys.End) Value = Range;
+      if (e.Key == SharpDX.Toolkit.Input.Keys.Left || e.Key ==SharpDX.Toolkit.Input.Keys.Down) Value -= stepSize;
+      else if (e.Key ==SharpDX.Toolkit.Input.Keys.Right || e.Key ==SharpDX.Toolkit.Input.Keys.Up) Value += stepSize;
+      else if (e.Key ==SharpDX.Toolkit.Input.Keys.PageDown) Value -= pageSize;
+      else if (e.Key ==SharpDX.Toolkit.Input.Keys.PageUp) Value += pageSize;
+      else if (e.Key ==SharpDX.Toolkit.Input.Keys.Home) Value = 0;
+      else if (e.Key ==SharpDX.Toolkit.Input.Keys.End) Value = Range;
     }
     ////////////////////////////////////////////////////////////////////////////
     
